@@ -115,16 +115,6 @@
       </tags>
   </entry>
   <entry>
-    <title>远程部署到GitHub</title>
-    <url>/2020/02/04/%E8%BF%9C%E7%A8%8B%E9%83%A8%E7%BD%B2%E5%88%B0GitHub/</url>
-    <content><![CDATA[<h3 id="进行配置"><a href="#进行配置" class="headerlink" title="进行配置"></a>进行配置</h3><p><code>git config --global user.name yourname</code><br><code>git config --global user.email &quot;youremail&quot;</code></p>
-<h3 id="测试是否能连接到GitHub"><a href="#测试是否能连接到GitHub" class="headerlink" title="测试是否能连接到GitHub"></a>测试是否能连接到GitHub</h3><p><code>ssh -T git@github.com</code></p>
-]]></content>
-      <tags>
-        <tag>博客搭建</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hello World</title>
     <url>/2020/02/02/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
