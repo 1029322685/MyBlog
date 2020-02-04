@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>远程部署到GitHub</title>
+    <url>/2020/02/04/%E8%BF%9C%E7%A8%8B%E9%83%A8%E7%BD%B2%E5%88%B0GitHub/</url>
+    <content><![CDATA[]]></content>
+      <tags>
+        <tag>博客搭建</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>My First Page</title>
     <url>/2020/02/03/My-First-Page/</url>
     <content><![CDATA[<h1 id="新人报到"><a href="#新人报到" class="headerlink" title="新人报到"></a>新人报到</h1><h2 id="即将开启个人博客搭建"><a href="#即将开启个人博客搭建" class="headerlink" title="即将开启个人博客搭建"></a>即将开启个人博客搭建</h2><p><a href="https://1029322685.github.io/" target="_blank" rel="noopener">我的博客</a></p>
