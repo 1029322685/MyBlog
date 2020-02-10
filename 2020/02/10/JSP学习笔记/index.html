@@ -106,7 +106,7 @@
 <meta property="og:image" content="http://yoursite.com/images/jspStudy/scope_request.png">
 <meta property="og:image" content="http://yoursite.com/images/jspStudy/scope_page.png">
 <meta property="article:published_time" content="2020-02-10T03:45:18.000Z">
-<meta property="article:modified_time" content="2020-02-10T06:34:40.171Z">
+<meta property="article:modified_time" content="2020-02-10T06:39:39.403Z">
 <meta property="article:author" content="Leon Wang">
 <meta property="article:tag" content="JSP">
 <meta property="article:tag" content="学习笔记">
@@ -473,10 +473,8 @@
 <li>无参的公有构造方法</li>
 <li>属性私有</li>
 <li>getter和setter方法<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//公有类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Students</span></span>&#123;</span><br><span class="line">    <span class="comment">//属性私有</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">	<span class="comment">//无参的公有构造方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Students</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="comment">//getter和setter方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span></span>&#123;<span class="keyword">this</span>.name=name;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> <span class="keyword">this</span>.name;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span></span>&#123;<span class="keyword">this</span>.age=age;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> <span class="keyword">this</span>.age;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="什么是JSP动作"><a href="#什么是JSP动作" class="headerlink" title="什么是JSP动作"></a>什么是JSP动作</h4>JSP动作元素（action elements），动作元素为请求处理阶段提供信息。动作元素遵循XML元素的语法，有一个包含元素名的开始标签，可以有属性、可选内容、与开始标签匹配的结束标签。<ul>
-<li>第一类是与存取JavaBean有关的，包括：<br>&lt;jsp:useBean&gt; &lt;jsp:setProperty&gt;&lt;jsp:getProperty&gt;</li>
-</ul>
-</li>
+<h4 id="什么是JSP动作"><a href="#什么是JSP动作" class="headerlink" title="什么是JSP动作"></a>什么是JSP动作</h4>JSP动作元素（action elements），动作元素为请求处理阶段提供信息。动作元素遵循XML元素的语法，有一个包含元素名的开始标签，可以有属性、可选内容、与开始标签匹配的结束标签。</li>
+<li>第一类是与存取JavaBean有关的，包括：<br> &lt;jsp:useBean&gt; &lt;jsp:setProperty&gt;&lt;jsp:getProperty&gt;</li>
 <li>第二类是JSP1.2就看似是有的基本元素，包括6个动作元素：<br>&lt;jsp:include&gt;&lt;jsp:forward&gt;&lt;jsp:param&gt;&lt;jsp:plugin&gt;&lt;jsp:params&gt;&lt;jsp:fallback&gt;</li>
 <li>第三类是JSP2.0新增加的元素，主要与JSP Document有关，包括6个元素：<br>&lt;jsp:root&gt;&lt;jsp:declaration&gt;&lt;jsp:scriptlet&gt;&lt;jsp:expression&gt;&lt;jsp:text&gt;&lt;jsp:output&gt;</li>
 <li>第四类是JSP2.0新增的动作元素，主要用来动态生成XML元素标签的值，包括3个动作：<br>&lt;jsp:attribute&gt;&lt;jsp:body&gt;&lt;jsp:element&gt;</li>
