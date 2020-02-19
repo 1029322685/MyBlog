@@ -73,7 +73,7 @@
 <li>file：文件选择框</li>
 <li>hidden：隐藏域</li>
 <li>按钮：<ol>
-<li>subm：提交按钮，用于提交表单</li>
+<li>submit：提交按钮，用于提交表单</li>
 <li>button：普通按钮</li>
 <li>image：图片提交按钮。</li>
 </ol>
