@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="JSP,学习笔记," />
+  <meta name="keywords" content="学习笔记,JSP," />
 
 
 
@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="WEB-INFO目录结构WEB-INF 是Java的WEB应用的安全目录，客户端上访问不到，只有服务端才能访问。web.xml 是项目部署文件。class文件夹 用于存放.class文件。lib文件夹 存放项目所需jar包. JSP页面元素构成静态内容指令 page指令： 位于jsp页面顶端，同一个页面可以有多个page指令。 language：指定jsp页面使用的脚本语言，默认为Java。 im">
+<meta name="description" content="WEB-INFO目录结构WEB-INF 是Java的WEB应用的安全目录，客户端上访问不到，只有服务端才能访问。web.xml 是项目部署文件。class文件夹 用于存放.class文件。lib文件夹 存放项目所需jar包. JSP页面元素构成静态内容HTML静态文件体 指令 page指令： 位于jsp页面顶端，同一个页面可以有多个page指令。 language：指定jsp页面使用的脚本语言，默">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JSP学习笔记">
 <meta property="og:url" content="http://yoursite.com/2020/02/10/JSP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Leon&#39;s blog">
-<meta property="og:description" content="WEB-INFO目录结构WEB-INF 是Java的WEB应用的安全目录，客户端上访问不到，只有服务端才能访问。web.xml 是项目部署文件。class文件夹 用于存放.class文件。lib文件夹 存放项目所需jar包. JSP页面元素构成静态内容指令 page指令： 位于jsp页面顶端，同一个页面可以有多个page指令。 language：指定jsp页面使用的脚本语言，默认为Java。 im">
+<meta property="og:description" content="WEB-INFO目录结构WEB-INF 是Java的WEB应用的安全目录，客户端上访问不到，只有服务端才能访问。web.xml 是项目部署文件。class文件夹 用于存放.class文件。lib文件夹 存放项目所需jar包. JSP页面元素构成静态内容HTML静态文件体 指令 page指令： 位于jsp页面顶端，同一个页面可以有多个page指令。 language：指定jsp页面使用的脚本语言，默">
 <meta property="og:image" content="http://yoursite.com/images/jspStudy/out.png">
 <meta property="og:image" content="http://yoursite.com/images/jspStudy/request.png">
 <meta property="og:image" content="http://yoursite.com/images/jspStudy/response.png">
@@ -114,10 +114,10 @@
 <meta property="og:image" content="http://yoursite.com/images/jspStudy/scope_request.png">
 <meta property="og:image" content="http://yoursite.com/images/jspStudy/scope_page.png">
 <meta property="article:published_time" content="2020-02-10T03:45:18.000Z">
-<meta property="article:modified_time" content="2020-02-12T10:49:50.595Z">
+<meta property="article:modified_time" content="2020-02-17T03:49:12.384Z">
 <meta property="article:author" content="Leon Wang">
-<meta property="article:tag" content="JSP">
 <meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="JSP">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/images/jspStudy/out.png">
 
@@ -127,7 +127,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Gemini',
+    scheme: 'Pisces',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -387,11 +387,6 @@
           
 
           
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv">本文总阅读数<i class="fa fa-file-o"></i>
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
-            </span>
-          
 
           
             <div class="post-wordcount">
@@ -442,7 +437,8 @@
 
       
         <h2 id="WEB-INFO目录结构"><a href="#WEB-INFO目录结构" class="headerlink" title="WEB-INFO目录结构"></a>WEB-INFO目录结构</h2><p><strong>WEB-INF</strong> 是Java的WEB应用的安全目录，客户端上访问不到，只有服务端才能访问。<br><strong>web.xml</strong> 是项目部署文件。<br><strong>class文件夹</strong> 用于存放.class文件。<br><strong>lib文件夹</strong> 存放项目所需jar包.</p>
-<h2 id="JSP页面元素构成"><a href="#JSP页面元素构成" class="headerlink" title="JSP页面元素构成"></a>JSP页面元素构成</h2><h4 id="静态内容"><a href="#静态内容" class="headerlink" title="静态内容"></a>静态内容</h4><h6 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h6><ul>
+<h2 id="JSP页面元素构成"><a href="#JSP页面元素构成" class="headerlink" title="JSP页面元素构成"></a>JSP页面元素构成</h2><h6 id="静态内容"><a href="#静态内容" class="headerlink" title="静态内容"></a>静态内容</h6><p>HTML静态文件体</p>
+<h6 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h6><ul>
 <li>page指令： 位于jsp页面顶端，同一个页面可以有多个page指令。</li>
 <li>language：指定jsp页面使用的脚本语言，默认为Java。</li>
 <li>import：引用脚本中使用到的类文件。</li>
@@ -678,9 +674,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JSP/" rel="tag"># JSP</a>
-          
             <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+          
+            <a href="/tags/JSP/" rel="tag"># JSP</a>
           
         </div>
       
@@ -702,6 +698,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/19/HTML%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="HTML标签回顾">
+                HTML标签回顾 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -782,7 +782,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -793,7 +793,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -804,7 +804,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -847,7 +847,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#WEB-INFO目录结构"><span class="nav-number">1.</span> <span class="nav-text">WEB-INFO目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSP页面元素构成"><span class="nav-number">2.</span> <span class="nav-text">JSP页面元素构成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#静态内容"><span class="nav-number">2.0.1.</span> <span class="nav-text">静态内容</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#指令"><span class="nav-number">2.0.1.0.1.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#注释"><span class="nav-number">2.0.1.0.2.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#小脚本"><span class="nav-number">2.0.1.0.3.</span> <span class="nav-text">小脚本</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#声明"><span class="nav-number">2.0.1.0.4.</span> <span class="nav-text">声明</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#表达式"><span class="nav-number">2.0.1.0.5.</span> <span class="nav-text">表达式</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSP内置对象"><span class="nav-number">3.</span> <span class="nav-text">JSP内置对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#jsp九大内置对象"><span class="nav-number">3.0.1.</span> <span class="nav-text">jsp九大内置对象</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#常用的五个"><span class="nav-number">3.0.1.0.1.</span> <span class="nav-text">常用的五个:</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#不常用的"><span class="nav-number">3.0.1.0.2.</span> <span class="nav-text">不常用的:</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#includ指令"><span class="nav-number">3.0.1.0.3.</span> <span class="nav-text">includ指令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#include指令和include动作标签"><span class="nav-number">3.0.2.</span> <span class="nav-text">include指令和include动作标签</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#includ指令-1"><span class="nav-number">3.0.2.0.1.</span> <span class="nav-text">includ指令</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#include动作标签"><span class="nav-number">3.0.2.0.2.</span> <span class="nav-text">include动作标签</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#include指令和include动作比较"><span class="nav-number">3.0.2.0.3.</span> <span class="nav-text">include指令和include动作比较</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#forward动作"><span class="nav-number">3.0.3.</span> <span class="nav-text">forward动作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#param动作"><span class="nav-number">3.0.4.</span> <span class="nav-text">param动作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cookie：是web服务器保存在客户端的一系列文本信息。"><span class="nav-number">3.0.5.</span> <span class="nav-text">Cookie：是web服务器保存在客户端的一系列文本信息。</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Cookie的作用："><span class="nav-number">3.0.5.0.1.</span> <span class="nav-text">Cookie的作用：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#jsp中创建和使用Cookie"><span class="nav-number">3.0.5.0.2.</span> <span class="nav-text">jsp中创建和使用Cookie</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#项目案例"><span class="nav-number">3.0.5.0.3.</span> <span class="nav-text">项目案例</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Session和Cookie对比"><span class="nav-number">3.0.5.0.4.</span> <span class="nav-text">Session和Cookie对比</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaBean"><span class="nav-number">4.</span> <span class="nav-text">JavaBean</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设计原则"><span class="nav-number">4.0.1.</span> <span class="nav-text">设计原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是JSP动作"><span class="nav-number">4.0.2.</span> <span class="nav-text">什么是JSP动作</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-用普通方式创建JavaBean实例："><span class="nav-number">4.0.2.0.1.</span> <span class="nav-text">1.用普通方式创建JavaBean实例：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-在jsp页面中通常使用jsp动作标签使用JavaBean，常用的有以下三个："><span class="nav-number">4.0.2.0.2.</span> <span class="nav-text">2.在jsp页面中通常使用jsp动作标签使用JavaBean，常用的有以下三个：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-JavaBean的四个作用范围"><span class="nav-number">4.0.2.0.3.</span> <span class="nav-text">3.JavaBean的四个作用范围:</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#WEB-INFO目录结构"><span class="nav-number">1.</span> <span class="nav-text">WEB-INFO目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSP页面元素构成"><span class="nav-number">2.</span> <span class="nav-text">JSP页面元素构成</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#静态内容"><span class="nav-number">2.0.0.0.1.</span> <span class="nav-text">静态内容</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#指令"><span class="nav-number">2.0.0.0.2.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#注释"><span class="nav-number">2.0.0.0.3.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#小脚本"><span class="nav-number">2.0.0.0.4.</span> <span class="nav-text">小脚本</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#声明"><span class="nav-number">2.0.0.0.5.</span> <span class="nav-text">声明</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#表达式"><span class="nav-number">2.0.0.0.6.</span> <span class="nav-text">表达式</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSP内置对象"><span class="nav-number">3.</span> <span class="nav-text">JSP内置对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#jsp九大内置对象"><span class="nav-number">3.0.1.</span> <span class="nav-text">jsp九大内置对象</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#常用的五个"><span class="nav-number">3.0.1.0.1.</span> <span class="nav-text">常用的五个:</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#不常用的"><span class="nav-number">3.0.1.0.2.</span> <span class="nav-text">不常用的:</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#includ指令"><span class="nav-number">3.0.1.0.3.</span> <span class="nav-text">includ指令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#include指令和include动作标签"><span class="nav-number">3.0.2.</span> <span class="nav-text">include指令和include动作标签</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#includ指令-1"><span class="nav-number">3.0.2.0.1.</span> <span class="nav-text">includ指令</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#include动作标签"><span class="nav-number">3.0.2.0.2.</span> <span class="nav-text">include动作标签</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#include指令和include动作比较"><span class="nav-number">3.0.2.0.3.</span> <span class="nav-text">include指令和include动作比较</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#forward动作"><span class="nav-number">3.0.3.</span> <span class="nav-text">forward动作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#param动作"><span class="nav-number">3.0.4.</span> <span class="nav-text">param动作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cookie：是web服务器保存在客户端的一系列文本信息。"><span class="nav-number">3.0.5.</span> <span class="nav-text">Cookie：是web服务器保存在客户端的一系列文本信息。</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Cookie的作用："><span class="nav-number">3.0.5.0.1.</span> <span class="nav-text">Cookie的作用：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#jsp中创建和使用Cookie"><span class="nav-number">3.0.5.0.2.</span> <span class="nav-text">jsp中创建和使用Cookie</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#项目案例"><span class="nav-number">3.0.5.0.3.</span> <span class="nav-text">项目案例</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Session和Cookie对比"><span class="nav-number">3.0.5.0.4.</span> <span class="nav-text">Session和Cookie对比</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaBean"><span class="nav-number">4.</span> <span class="nav-text">JavaBean</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设计原则"><span class="nav-number">4.0.1.</span> <span class="nav-text">设计原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是JSP动作"><span class="nav-number">4.0.2.</span> <span class="nav-text">什么是JSP动作</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-用普通方式创建JavaBean实例："><span class="nav-number">4.0.2.0.1.</span> <span class="nav-text">1.用普通方式创建JavaBean实例：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-在jsp页面中通常使用jsp动作标签使用JavaBean，常用的有以下三个："><span class="nav-number">4.0.2.0.2.</span> <span class="nav-text">2.在jsp页面中通常使用jsp动作标签使用JavaBean，常用的有以下三个：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-JavaBean的四个作用范围"><span class="nav-number">4.0.2.0.3.</span> <span class="nav-text">3.JavaBean的四个作用范围:</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -881,30 +881,10 @@
 
 
 
-
+<a href="http://www.beian.miit.gov.cn/" target="_blank">豫ICP备20003784号</a>
 
 
         
-<div class="busuanzi-count">
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="site-uv">
-      本站访问数<i class="fa fa-user"></i>
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-      人次
-    </span>
-  
-
-  
-    <span class="site-pv">
-      本站总访问量<i class="fa fa-eye"></i>
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-      次
-    </span>
-  
-</div>
-
 
 
 
