@@ -1,6 +1,292 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>JavaScript学习笔记（一）</title>
+    <url>/2020/02/26/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h1><h2 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h2><p>客户端脚本语言，不需要编译直接就可以被浏览器解析执行。运行在客户端浏览器，每个浏览器都有JavaScript的解析引擎。<br>由ECMAScript、BOM和DOM构成。</p>
+<h4 id="功能："><a href="#功能：" class="headerlink" title="功能："></a>功能：</h4><p>可以增强用户和HTML页面的交互过程，可以控制HTML元素，让页面有一些动态效果，增强用户体验。</p>
+<h2 id="ECMAScript：客户端脚本语言标准。"><a href="#ECMAScript：客户端脚本语言标准。" class="headerlink" title="ECMAScript：客户端脚本语言标准。"></a>ECMAScript：客户端脚本语言标准。</h2><h4 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h4><ol>
+<li><p>与HTML的结合方式</p>
+<ul>
+<li><p>内部js：定义&lt;script&gt;标签，在标签体中写js代码。</p>
+<blockquote>
+<p>&lt;script&gt;js代码</script></p>
+</blockquote>
+</li>
+<li><p>外部js：定义&lt;script&gt;标签，通过src属性引入外部的js文件。</p>
+<blockquote>
+<p>&lt;script src=”文件名.js”&gt;</script></p>
+</blockquote>
+</li>
+</ul>
+<p><strong>注意：</strong>&lt;script&gt;标签可以定义在HTML页面的任意位置、也可以定义多个，但是定义的位置会影响执行顺序。</p>
+</li>
+<li><p>注释</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">&#x2F;&#x2F;单行注释</span><br><span class="line">&#x2F;*</span><br><span class="line">多行注释</span><br><span class="line">*&#x2F;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>数据类型</p>
+<ul>
+<li>原始数据类型（基本数据类型）：<ol>
+<li>number：数字。整数/小数/NaN</li>
+<li>string：字符串。字符/字符串</li>
+<li>boolean：true/false</li>
+<li>null：一个对象为空的占位符</li>
+<li>undefi：未定义。如果一个变量没有给初始化值，则会被默认赋值为undef</li>
+</ol>
+</li>
+<li>引用数据类型（对象）</li>
+</ul>
+</li>
+<li><p>变量<br>JavaScript的变量是弱类型变量，在申请变量存储空间时不定义数据类型。<br><strong>语法：</strong></p>
+<blockquote>
+<p>var 变量名=变量值</p>
+</blockquote>
+</li>
+<li><p>运算符</p>
+<ul>
+<li><p>一元运算符</p>
+<ol>
+<li>++：自增</li>
+<li>–：自减</li>
+<li>+(-)：正（负）号。在js中如果运算数不是运算所要求的类型，js引擎会自动将运算数进行类型转换。例如：<blockquote>
+<p>var b = +”123”;  //原本b应该是字符串类型123，但是由于正号的转换，b变成了数值类型123<br>var a = +”abc”  //字符串abc会被转为NaN<br>var c = true  //转为1<br>var d = false //转为0</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li><p>算术运算符<br><strong>+ 、- 、* 、/</strong></p>
+</li>
+<li><p>赋值运算符<br><strong>=</strong></p>
+</li>
+<li><p>比较运算符<br><strong>&gt; 、&lt; 、&gt;= 、&lt;= 、== 、===(全等于)</strong></p>
+<ul>
+<li><p>类型相同直接比较，字符串的比较按照字典顺序逐一比较，直到比出大小为止。</p>
+<blockquote>
+<p>3&gt;4  //false<br>“abc”&gt;”acd”  //第二位c大于b 返回false</p>
+</blockquote>
+</li>
+<li><p>类型不同，先转换类型在比较</p>
+<blockquote>
+<p>“123”&gt;123  //false<br>“123”==123  //false  由于类型不同，不能直接比，返回false。此时要用===（全等于）</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>逻辑运算符<br><strong>&amp;&amp; 、|| 、!</strong><br>注意：其他类型转boolean</p>
+<ol>
+<li>number：0或NaN为false，其余为true</li>
+<li>string：除了空字符串（””），其余为true</li>
+<li>null&amp;undef：都是假</li>
+<li>对象：所有对象都是true</li>
+</ol>
+</li>
+<li><p>三元运算符<br><strong>? 、:</strong></p>
+<blockquote>
+<p>var a = 3;<br> var b = 4;<br> var c = a &gt; b ? 1 : 0;  // 如果a&gt;b 则c=1，否则c=0</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>流程控制语句</p>
+<ul>
+<li>if …else…</li>
+<li>switch 在js中可以接受任意类型的数据</li>
+<li>while</li>
+<li>do…while</li>
+<li>for</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p>九九乘法表小项目：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>九九乘法表<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">      td&#123;</span><br><span class="line">         border: 1px solid;</span><br><span class="line">      &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">document</span>.write(<span class="string">"&lt;table align='center'&gt;"</span>);</span></span><br><span class="line"><span class="actionscript">      <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= <span class="number">9</span>; i++)&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">document</span>.write(<span class="string">"&lt;tr&gt;"</span>)</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">1</span>; j &lt;= i; j++)&#123;</span></span><br><span class="line"><span class="javascript">          <span class="built_in">document</span>.write(<span class="string">"&lt;td&gt;"</span>)</span></span><br><span class="line"><span class="javascript">          <span class="built_in">document</span>.write(i + <span class="string">"*"</span> + j + <span class="string">"="</span> + (i*j) +<span class="string">"&amp;nbsp;&amp;nbsp;&amp;nbsp;"</span>);</span></span><br><span class="line"><span class="javascript">          <span class="built_in">document</span>.write(<span class="string">"&lt;/td&gt;"</span>)</span></span><br><span class="line">        &#125;</span><br><span class="line"><span class="javascript">        <span class="built_in">document</span>.write(<span class="string">"&lt;br&gt;"</span>);</span></span><br><span class="line"><span class="javascript">        <span class="built_in">document</span>.write(<span class="string">"&lt;/tr&gt;"</span>)</span></span><br><span class="line">      &#125;</span><br><span class="line"><span class="javascript">      <span class="built_in">document</span>.write(<span class="string">"&lt;/table&gt;"</span>)</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="基本对象"><a href="#基本对象" class="headerlink" title="基本对象"></a>基本对象</h4><h6 id="Function函数-方法-对象："><a href="#Function函数-方法-对象：" class="headerlink" title="Function函数(方法)对象："></a>Function函数(方法)对象：</h6><ol>
+<li><p>创建：</p>
+<blockquote>
+<p>var 方法名 = new Function(参数列表, 方法体);</p>
+</blockquote>
+<blockquote>
+<p> function 方法名称（参数列表）{<br> 方法体<br>}</p>
+</blockquote>
+<blockquote>
+<p>var 方法名称 = function(形式参数列表){<br>方法体<br>}</p>
+</blockquote>
+</li>
+<li><p>方法</p>
+</li>
+<li><p>属性：</p>
+<ul>
+<li>length：代表形参个数</li>
+</ul>
+</li>
+<li><p>特点：</p>
+<ul>
+<li>方法定义时，形参的类型不用写,返回值也不用写。</li>
+<li>方法是一个对象，定义名称相同的方法，会覆盖之前的。</li>
+<li>在js中方法的调用值与方法名称有关，与参数列表无关。</li>
+<li>在方法声明中，有一个隐藏的内置对象（数组），arguments封装所有的实际参数。<blockquote>
+<p>求任意个数的和：</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    function add()&#123;</span><br><span class="line">        var sum &#x3D; 0;</span><br><span class="line">        for (var i &#x3D; 0; i &lt; arguments.length; i++)&#123;</span><br><span class="line">            sum +&#x3D; arguments[i];</span><br><span class="line">        &#125;</span><br><span class="line">        return sum;</span><br><span class="line">    &#125;</span><br><span class="line">    var sum &#x3D; add(1, 2, 3, 4);</span><br><span class="line">    alert(sum);</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>调用：</p>
+<blockquote>
+<p>方法名称（实际参数列表）;</p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ul>
+<h6 id="Array："><a href="#Array：" class="headerlink" title="Array："></a>Array：</h6><ol>
+<li><p>创建：</p>
+<blockquote>
+<p>var arr = new Array(元素列表);</p>
+</blockquote>
+<blockquote>
+<p> var arr = new Array(默认长度);</p>
+</blockquote>
+<blockquote>
+<p>var arr = [元素列表];</p>
+</blockquote>
+</li>
+<li><p>方法：</p>
+<ul>
+<li>join()： 将数组中的元素按照指定的分隔符拼接为字符串</li>
+<li>push()：列表末尾进行追加</li>
+</ul>
+</li>
+<li><p>属性：</p>
+<ul>
+<li>length：代表数组的长度</li>
+</ul>
+</li>
+<li><p>特点：</p>
+<ul>
+<li>JS中，数组元素的类型可变</li>
+<li>JS中，数组的长度可变</li>
+</ul>
+</li>
+</ol>
+<h6 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h6><h6 id="Date："><a href="#Date：" class="headerlink" title="Date："></a>Date：</h6><ol>
+<li><p>创建：</p>
+<blockquote>
+<p>var date = new Date();</p>
+</blockquote>
+</li>
+<li><p>方法：</p>
+<ul>
+<li>toLocaleString()：返回当前date对象对应的时间本地字符串格式</li>
+<li>getTime()：返回当前日期对象描述的时间至1970年1月1日零点的毫秒值差（用于时间戳）</li>
+</ul>
+</li>
+</ol>
+<h6 id="Math："><a href="#Math：" class="headerlink" title="Math："></a>Math：</h6><ol>
+<li>方法：<ul>
+<li>random()：返回0~1的随机数</li>
+<li>ceil(x)：对数字向上取整</li>
+<li>floor(x)：对数字向下取整</li>
+<li>round(x)：把数字四舍五入为最接近的整数</li>
+</ul>
+</li>
+<li>属性：<ul>
+<li>PI：圆周率</li>
+</ul>
+</li>
+<li>特点：<br>Math对象不用创建，直接使用。</li>
+</ol>
+<h6 id="Number："><a href="#Number：" class="headerlink" title="Number："></a>Number：</h6><ol>
+<li><p>创建：</p>
+<blockquote>
+<p>var arr = new Array(元素列表);</p>
+</blockquote>
+</li>
+<li><p>方法：</p>
+</li>
+<li><p>属性：</p>
+<ul>
+<li>length：代表数组的长度</li>
+</ul>
+</li>
+<li><p>特点：</p>
+</li>
+</ol>
+<h6 id="String："><a href="#String：" class="headerlink" title="String："></a>String：</h6><h6 id="RegExp："><a href="#RegExp：" class="headerlink" title="RegExp："></a>RegExp：</h6><p><strong>正则表达式：</strong> 定义字符串的组成规则。</p>
+<ol>
+<li>单个字符：[]<br>如：[a] [ab] [a-zA-Z0-9]<br>特殊符号代表特殊含义的单个字符：<ul>
+<li>\d：单个数字字符[0-9]</li>
+<li>\w：单个单词字符[a-zA-Z0-9]</li>
+</ul>
+</li>
+<li>量词符号：<ul>
+<li>?：表示出现0次或1次</li>
+<li>*：表示出现0次或多次</li>
+<li>+：表示出现1次或多次</li>
+<li>{m,n}：表示m&lt;=数量&lt;=n<ul>
+<li>m如果缺省{,n}：最多n次</li>
+<li>n如果缺省{m,}：最少n次</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>开始结束符号：<ul>
+<li>^：开始</li>
+<li>$：结束</li>
+</ul>
+</li>
+</ol>
+<p><strong>正则对象：</strong></p>
+<ol>
+<li><p>创建</p>
+<blockquote>
+<p>var reg = new RegExp(“正则表达式”);</p>
+</blockquote>
+<blockquote>
+<p>var reg = /正则表达式/;</p>
+</blockquote>
+</li>
+<li><p>方法</p>
+<ul>
+<li>test()：验证指定的字符串是否符合定义的规范，返回值为Boolean</li>
+</ul>
+</li>
+</ol>
+<h6 id="Global"><a href="#Global" class="headerlink" title="Global:"></a>Global:</h6><ol>
+<li><p>特点：全局对象，这个Global中封装的方法不需要对象就可以直接调用。方法名();</p>
+</li>
+<li><p>方法：</p>
+<ul>
+<li><p>encodeURI()：URL编码，只对汉字进行编码</p>
+</li>
+<li><p>decodeURI()：URL解码</p>
+</li>
+<li><p>encodeURIComponent()：URL编码，编码的字符更多</p>
+</li>
+<li><p>dncodeURIComponent()：URL解码</p>
+</li>
+<li><p>parseInt()：将字符串转为数字。逐一判断每一个字符是否为数字，直到不是数字位置，将前边数字部分转为number。</p>
+<blockquote>
+<p>“123” –&gt; 123<br>“123abc”  –&gt; 123</p>
+</blockquote>
+</li>
+<li><p>isNaN()：判断一个值是否是NaN。NaN参与的==比较返回结果均为false，只能通过该方法判断。</p>
+</li>
+<li><p>eval()：将JavaScript的字符串转为脚本并执行。</p>
+<blockquote>
+<p>var jscode = “alert(123)”;  //原本为字符串<br>eval(jscode);  //通过eval()方法解析字符串片段</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>JSP课程学习</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>HTML标签回顾</title>
     <url>/2020/02/19/HTML%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h4 id="文本标签"><a href="#文本标签" class="headerlink" title="文本标签"></a>文本标签</h4><ol>
@@ -101,12 +387,12 @@
 <li>language：指定jsp页面使用的脚本语言，默认为Java。</li>
 <li>import：引用脚本中使用到的类文件。</li>
 <li>contentType：指定jsp页面编码方式，默认为text/html，ISO-8859-1。</li>
-<li>includ指令：将一个外部文件嵌入到当前jsp文件中，并解析页面中的jsp语句。</li>
+<li>include指令：将一个外部文件嵌入到当前jsp文件中，并解析页面中的jsp语句。</li>
 <li>taglib指令：使用标签库定义新的标签，在jsp页面中启用定制行为。</li>
 </ul>
 <p><strong>示例：</strong><br>       <code>&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;</code></p>
 <h6 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h6><p>​    HTML注释：<br>​        <code>&lt;!-- html注释，客户端可见 --&gt;</code><br>​    JSP注释：<br>​        <code>&lt;%-- jsp注释，客户端不可见 --%&gt;</code><br>​    JSP脚本中可使用Java注释。</p>
-<h6 id="小脚本"><a href="#小脚本" class="headerlink" title="小脚本"></a>小脚本</h6><p><code>&lt;%out.println(&quot;这是jsp脚本&quot;)%&gt;</code><br><em>实验小案例参考exercise.jsp</em></p>
+<h6 id="小脚本"><a href="#小脚本" class="headerlink" title="小脚本"></a>小脚本</h6><p><code>&lt;%out.println(&quot;这是jsp脚本&quot;)%&gt;</code></p>
 <h6 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h6><p>在jsp页面中定义变量或者发方法。<br><code>&lt;! String s = &quot;张三&quot;;&gt;</code></p>
 <h6 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h6><p>在jsp页面中执行的表达式。<br><code>&lt;%=1+1 %&gt; //注意表达式后面不写;</code></p>
 <h2 id="JSP内置对象"><a href="#JSP内置对象" class="headerlink" title="JSP内置对象"></a>JSP内置对象</h2><p>jsp内置对象是web容器创建的一组对象，不使用new关键词就可以使用的内置对象，例如：</p>
