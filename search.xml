@@ -1,6 +1,213 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>JavaScript学习笔记（二）</title>
+    <url>/2020/03/20/BOM%E5%92%8CDOM/</url>
+    <content><![CDATA[<h2 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h2><h4 id="概念：Browser-Object-Model浏览器对象模型，将浏览器的各个组成部分封装成对象。"><a href="#概念：Browser-Object-Model浏览器对象模型，将浏览器的各个组成部分封装成对象。" class="headerlink" title="概念：Browser Object Model浏览器对象模型，将浏览器的各个组成部分封装成对象。"></a>概念：Browser Object Model浏览器对象模型，将浏览器的各个组成部分封装成对象。</h4><h4 id="组成："><a href="#组成：" class="headerlink" title="组成："></a>组成：</h4><h6 id="Window：窗口对象"><a href="#Window：窗口对象" class="headerlink" title="Window：窗口对象"></a>Window：窗口对象</h6><ul>
+<li>创建<br>Window的对象不需要创建，直接可以调用方法。</li>
+<li>方法</li>
+</ul>
+<ol>
+<li><p>与弹出框有关的方法：<br><br><strong>alert()：</strong> 显示带有一段消息和一个确认按钮的警告框。<br><br><strong>confirm()：</strong> 显示带有一段消息以及确认按钮和取消按钮的对话框。返回值为false或true。<br><br><strong>prompt()：</strong> 显示可提示用户输入的对话框。</p>
+</li>
+<li><p>与打开关闭有关的方法：<br><br><strong>open():</strong> 打开一个新浏览器窗口对象，可加参数<br><br><strong>close():</strong> 关闭浏览器窗口<br></p>
+</li>
+<li><p>与定时器有关的方法：<br><br><strong>setTimeout()：</strong> 在指定的毫秒数后调用函数或计算表达式。（一次性定时器）<br></p>
+<blockquote>
+<p>var id = setTimeout(“js代码”,毫秒值);</p>
+</blockquote>
+<p><strong>clearTimeout()：</strong> 取消由setTimeout()设置的timeout。<br></p>
+<blockquote>
+<p>clearTimeout(“js代码”,毫秒值);</p>
+</blockquote>
+<p><strong>setInterval()：</strong> 按照指定的周期（以毫秒计）来调用函数或计算表达式。<br></p>
+<blockquote>
+<p>var id = setInterval(id);</p>
+</blockquote>
+<p><strong>clearInterval()：</strong> 取消由setInterval()设置的timeout。<br></p>
+<blockquote>
+<p>clearInterval(id);</p>
+</blockquote>
+<p>轮播图小案例：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">"pic"</span> <span class="attr">src</span>=<span class="string">"images/pic1.jpg"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> number = <span class="number">1</span>;</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">fun</span><span class="params">()</span></span>&#123;</span></span><br><span class="line">      number++;</span><br><span class="line">      if (number &gt; 3)&#123;</span><br><span class="line">        number = 1;</span><br><span class="line">      &#125;</span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> pic = <span class="built_in">document</span>.getElementById(<span class="string">"pic"</span>);</span></span><br><span class="line"><span class="actionscript">      pic.src = <span class="string">"images/pic"</span>+ number +<span class="string">".jpg"</span></span></span><br><span class="line">    &#125;</span><br><span class="line">    setInterval(fun,3000);</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>属性<ol>
+<li>获取其他BOM对象<br>history<br>location<br>navigator<br>screen</li>
+<li>获取DOM对象<br>document</li>
+</ol>
+</li>
+</ul>
+<h6 id="Location：地址栏对象"><a href="#Location：地址栏对象" class="headerlink" title="Location：地址栏对象"></a>Location：地址栏对象</h6><ul>
+<li><p>创建（获取）：</p>
+<ol>
+<li>window.location</li>
+<li>location</li>
+</ol>
+</li>
+<li><p>方法<br><br><strong>reload():</strong> 重新加载当前文档。</p>
+</li>
+<li><p>属性<br><br><strong>href：</strong> 设置或返回完整的URL。</p>
+</li>
+</ul>
+<p>倒计时跳转页面小案例：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">      p&#123;</span><br><span class="line">        text-align: center;</span><br><span class="line">      &#125;</span><br><span class="line">      span&#123;</span><br><span class="line">        color: red;</span><br><span class="line">      &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"time"</span>&gt;</span>5<span class="tag">&lt;/<span class="name">span</span>&gt;</span>秒后跳转至首页...</span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> second = <span class="number">5</span>;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> time = <span class="built_in">document</span>.getElementById(<span class="string">"time"</span>);</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">tim</span><span class="params">()</span></span>&#123;</span></span><br><span class="line">      second--;</span><br><span class="line">      if (second &lt;= 0)&#123;</span><br><span class="line"><span class="actionscript">        location.href = <span class="string">"https://www.baidu.com"</span>;</span></span><br><span class="line">      &#125;</span><br><span class="line"><span class="actionscript">      time.innerHTML = second + <span class="string">""</span>;</span></span><br><span class="line">    &#125;</span><br><span class="line">    setInterval(tim,1000);</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h6 id="History：历史记录对象"><a href="#History：历史记录对象" class="headerlink" title="History：历史记录对象"></a>History：历史记录对象</h6><ul>
+<li><p>创建</p>
+<ol>
+<li>window.history</li>
+<li>history</li>
+</ol>
+</li>
+<li><p>方法</p>
+<ol>
+<li><strong>back()：</strong> 加载history列表中的前一个URL。<br></li>
+<li><strong>forward()：</strong> 加载history列表中的下一个URL。<br></li>
+<li><strong>go()：</strong> 加载history列表中的某个具体页面。<br><blockquote>
+<p>history.go(1); //前进一个历史记录的页面（参数为负则倒退）</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li><p>属性<br><br><strong>length：</strong> 返回当前窗口历史列表中的URL数量。<br></p>
+</li>
+</ul>
+<h2 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h2><p>Document Object Model 文档对象模型<br><br>W3C DOM标准被分为3个不同的部分：<br></p>
+<ul>
+<li>核心DOM：针对任何结构化文档的标准模型</li>
+<li>XML DOM：针对XML文档的标准模型</li>
+<li>HTML DOM：针对HTML文档的标准模型<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><ol>
+<li>控制HTML文档的内容。<blockquote>
+<p>document.getElementByID(“id值”) // 通过元素的id获取元素对象</p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ul>
+<ol start="2">
+<li>操作Element对象：<ul>
+<li>修改标签的属性值</li>
+<li>修改标签体内容</li>
+</ul>
+</li>
+</ol>
+<h4 id="核心DOM模型"><a href="#核心DOM模型" class="headerlink" title="核心DOM模型"></a>核心DOM模型</h4><ul>
+<li>Document：文档对象</li>
+<li>Element：元素对象</li>
+<li>Attribute：属性对象</li>
+<li>Text：文本对象</li>
+<li>Comment：注释对象</li>
+<li>Node：节点对象（其他5个对象的父对象）</li>
+</ul>
+<h6 id="Document：文档对象"><a href="#Document：文档对象" class="headerlink" title="Document：文档对象"></a>Document：文档对象</h6><ul>
+<li><p>创建（获取）：通过window来获取和创建</p>
+<ol>
+<li>window.document</li>
+<li>document</li>
+</ol>
+</li>
+<li><p>方法：</p>
+<ol>
+<li><p>获取Element对象</p>
+<ol>
+<li>getElementById()：根据id属性值获取元素对象。id属性值一般唯一。</li>
+<li>getElementByTagName()：根据元素名称获取元素对象。返回值是一个数组。</li>
+<li>getElementByClassName()：根据Class属性值获取元素对象。返回值是一个数组。</li>
+<li>getElementByName()：根据name属性值获取元素对象。返回值是一个数组。</li>
+</ol>
+</li>
+<li><p>创建其他DOM对象</p>
+<ol>
+<li>creatAttribute(name)</li>
+<li>creatComment()</li>
+<li>creatElement()</li>
+<li>creatTextNode()</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<h6 id="Element：元素对象"><a href="#Element：元素对象" class="headerlink" title="Element：元素对象"></a>Element：元素对象</h6><ul>
+<li>创建：通过document来获取和创建</li>
+<li>方法：<ol>
+<li>removeAttribute()：删除属性</li>
+<li>setAttribute()：设置属性</li>
+</ol>
+</li>
+</ul>
+<h6 id="Node：节点对象"><a href="#Node：节点对象" class="headerlink" title="Node：节点对象"></a>Node：节点对象</h6><p>是整个DOM的主要数据类型。节点对象代表文档树中的一个单独的节点。节点可以是元素节点、属性节点、文本节点等。</p>
+<ul>
+<li>方法：<br>  CRUD dom树：<pre><code>1. appendChild()：向节点的子节点列表结尾添加新的子节点
+2. removeChild()：删除（并返回）当前节点的指定节点
+3. replaceChild()：用新节点替换一个子结点</code></pre></li>
+</ul>
+<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><ol>
+<li>功能：组件被执行了某些操作后，触发某些代码的执行。</li>
+<li>如何绑定事件：<ul>
+<li>直接在HTML标签上指定事件的属性（操作），属性值就是js代码。<br><br>例如onclick（单击事件）</li>
+<li>通过js获取元素对象，指定事件属性，设置一个函数。<blockquote>
+<p>document.getElementByID(“…”)</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="常见的事件"><a href="#常见的事件" class="headerlink" title="常见的事件"></a>常见的事件</h4><ol>
+<li><p>点击事件：</p>
+<ol>
+<li>onclick：单击事件</li>
+<li>ondblclick：双击事件</li>
+</ol>
+</li>
+<li><p>焦点事件：</p>
+<ol>
+<li>onblur：失去焦点</li>
+<li>onfocus：元素获得焦点</li>
+</ol>
+</li>
+<li><p>加载事件：</p>
+<ul>
+<li>onload：一张页面或一幅图像完成加载</li>
+</ul>
+</li>
+<li><p>鼠标事件：</p>
+<ol>
+<li>onmousedown：鼠标按钮被按下</li>
+<li>onmouseup：鼠标按键被松开</li>
+<li>onmousemove：鼠标被移开</li>
+<li>onmouseover：鼠标移到某个元素之上</li>
+<li>onmouseout：鼠标从某个元素移开</li>
+</ol>
+</li>
+<li><p>键盘事件：</p>
+<ol>
+<li>onkeydown：某个键盘被按下</li>
+<li>onkeyup：某个键盘被松开</li>
+<li>onkeypress：某个键盘被按下并松开</li>
+</ol>
+</li>
+<li><p>选中和改变：</p>
+<ol>
+<li>onchange：域的内容被改变</li>
+<li>onselect：文本被选中</li>
+</ol>
+</li>
+<li><p>表单事件：</p>
+<ol>
+<li>onsubmit：确认按钮被点击</li>
+<li>onreset：重置按钮被点击</li>
+</ol>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>JSP课程学习</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaScript学习笔记（一）</title>
     <url>/2020/02/26/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h1><h2 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h2><p>客户端脚本语言，不需要编译直接就可以被浏览器解析执行。运行在客户端浏览器，每个浏览器都有JavaScript的解析引擎。<br>由ECMAScript、BOM和DOM构成。</p>
