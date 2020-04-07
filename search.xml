@@ -1,6 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>page</title>
+    <url>/2020/04/07/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+    <content><![CDATA[<h2 id="EL表达式"><a href="#EL表达式" class="headerlink" title="EL表达式"></a>EL表达式</h2><ol>
+<li>概念：Expression Language表达式语言</li>
+<li>作用：替换和简化jsp页面中的Java代码</li>
+<li>语法：${表达式}</li>
+<li>注意：jsp默认支持el表达式</li>
+<li>使用：<ul>
+<li>运算</li>
+<li>获取值</li>
+</ul>
+</li>
+</ol>
+<h4 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h4><ul>
+<li>运算符<ol>
+<li>算数运算符：+ - * /(div) %(mod)</li>
+<li>比较运算符：&gt; &lt; &gt;= &lt;= == !=</li>
+<li>逻辑运算符：&amp;&amp;(and) ||(or) !(not)</li>
+<li>空运算符：empty<ul>
+<li>${empty list}：用于判断字符串、集合、数组对象是否为null或者长度是否为0</li>
+<li>${not empty str}：用于判断字符串、集合、数组对象是否不为null并且长度&gt;0</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">"text/html;charset=UTF-8"</span> language=<span class="string">"java"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">  &lt;h3&gt;算数运算&lt;/h3&gt;</span><br><span class="line">  $&#123;<span class="number">3</span> + <span class="number">4</span>&#125;&lt;br&gt;</span><br><span class="line">  $&#123;<span class="number">3</span> / <span class="number">4</span>&#125;&lt;br&gt;</span><br><span class="line">  $&#123;<span class="number">3</span> div <span class="number">4</span>&#125;&lt;br&gt;</span><br><span class="line">  $&#123;<span class="number">3</span> % <span class="number">4</span>&#125;&lt;br&gt;</span><br><span class="line">  $&#123;<span class="number">3</span> mod <span class="number">4</span>&#125;&lt;br&gt;</span><br><span class="line">  &lt;h3&gt;比较运算&lt;/h3&gt;</span><br><span class="line">  $&#123;<span class="number">3</span> == <span class="number">4</span>&#125;&lt;br&gt;</span><br><span class="line">  &lt;h3&gt;逻辑运算&lt;/h3&gt;</span><br><span class="line">  $&#123;<span class="number">3</span> &gt; <span class="number">4</span> &amp;&amp; <span class="number">3</span> &lt; <span class="number">4</span>&#125;&lt;br&gt;</span><br><span class="line">  $&#123;<span class="number">3</span> &gt; <span class="number">4</span> and <span class="number">3</span> &lt; <span class="number">4</span>&#125;&lt;br&gt;</span><br><span class="line">  &lt;h3&gt;empty运算符&lt;/h3&gt;</span><br><span class="line">  &lt;%</span><br><span class="line">    String str = <span class="string">"abc"</span>;</span><br><span class="line">    request.setAttribute(<span class="string">"str"</span>, str);</span><br><span class="line"></span><br><span class="line">    List list = <span class="keyword">new</span> ArrayList();</span><br><span class="line">    request.setAttribute(<span class="string">"list"</span>, list);</span><br><span class="line">  %&gt;</span><br><span class="line">  $&#123;empty str&#125;</span><br><span class="line">  $&#123;not empty list&#125;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="获取值"><a href="#获取值" class="headerlink" title="获取值"></a>获取值</h4><ul>
+<li>el表达式只能从域对象中获取值</li>
+<li>语法：<ol>
+<li>${域名称.键名}：从指定域中获取指定的键的值。<ul>
+<li>域名称：</li>
+</ul>
+<ol>
+<li>pageScope        –&gt;     pageContext</li>
+<li>requestScope     –&gt;     request</li>
+<li>sessionScope     –&gt;     session</li>
+<li>applicationScope –&gt;     application(ServletContext)</li>
+</ol>
+<ul>
+<li>举例：在request域中存储了name=张三</li>
+<li>获取：${reques.name}<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">"text/html;charset=UTF-8"</span> language=<span class="string">"java"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;获取域中的值&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;%</span><br><span class="line">        request.setAttribute(<span class="string">"name"</span>, <span class="string">"张三"</span>);</span><br><span class="line">        session.setAttribute(<span class="string">"age"</span>, <span class="string">"23"</span>);</span><br><span class="line">    %&gt;</span><br><span class="line">&lt;h3&gt;获取值&lt;/h3&gt;</span><br><span class="line">$&#123;requestScope.name&#125;</span><br><span class="line">$&#123;sessionScope.age&#125;</span><br><span class="line">&lt;%--  获取不到值时显示空字符串  --%&gt;</span><br><span class="line">$&#123;sessionScope.haha&#125;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>${键名}：表示依次从最小的域中查找是否有该键的对应值，直到找到为止。</li>
+<li>获取对象、List集合、Map集合中的值<ul>
+<li>对象：${域名称.键名.属性名}（本质上会去调用对象的getter方法）</li>
+<li>List集合：${域名称.键名[索引]}（索引超出数组长度，返回空字符串）</li>
+<li>Map集合：${域名称.键名.key名称}（或：${域名称.键名[“key名称”]}）</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="隐式对象pageContext"><a href="#隐式对象pageContext" class="headerlink" title="隐式对象pageContext"></a>隐式对象pageContext</h4><p>${pageContext.request}<br>在jsp页面中动态获取虚拟目录<br>${pageContext.request.contextPath}</p>
+<h2 id="JSTL标签"><a href="#JSTL标签" class="headerlink" title="JSTL标签"></a>JSTL标签</h2><ol>
+<li>概念：JavaServer Page Tag Library  JSP标准标签库</li>
+<li>作用：用于简化和替换jsp页面的java代码</li>
+<li>使用步骤：<ol>
+<li>导入jstl相关jar包</li>
+<li>引入标签库：taglib指令：&lt;%@ taglib &gt;</li>
+<li>使用标签</li>
+</ol>
+</li>
+<li>常用的JSTL标签<ol>
+<li>if：相当于Java代码的if语句</li>
+<li>choose：相当于Java代码的switch语句</li>
+<li>foreach：相当于Java代码的for语句</li>
+</ol>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>EL</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaScript学习笔记（二）</title>
     <url>/2020/03/20/BOM%E5%92%8CDOM/</url>
     <content><![CDATA[<h2 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h2><h4 id="概念：Browser-Object-Model浏览器对象模型，将浏览器的各个组成部分封装成对象。"><a href="#概念：Browser-Object-Model浏览器对象模型，将浏览器的各个组成部分封装成对象。" class="headerlink" title="概念：Browser Object Model浏览器对象模型，将浏览器的各个组成部分封装成对象。"></a>概念：Browser Object Model浏览器对象模型，将浏览器的各个组成部分封装成对象。</h4><h4 id="组成："><a href="#组成：" class="headerlink" title="组成："></a>组成：</h4><h6 id="Window：窗口对象"><a href="#Window：窗口对象" class="headerlink" title="Window：窗口对象"></a>Window：窗口对象</h6><ul>
