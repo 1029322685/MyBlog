@@ -1,6 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Filter过滤器</title>
+    <url>/2020/07/10/Filter%E8%BF%87%E6%BB%A4%E5%99%A8/</url>
+    <content><![CDATA[<p>##Filter:过滤器</p>
+<h4 id="1、作用：一般用于完成一些通用操作。如登陆验证、统一编码处理、敏感字符过滤等。"><a href="#1、作用：一般用于完成一些通用操作。如登陆验证、统一编码处理、敏感字符过滤等。" class="headerlink" title="1、作用：一般用于完成一些通用操作。如登陆验证、统一编码处理、敏感字符过滤等。"></a>1、作用：一般用于完成一些通用操作。如登陆验证、统一编码处理、敏感字符过滤等。</h4><h4 id="2、使用方法："><a href="#2、使用方法：" class="headerlink" title="2、使用方法："></a>2、使用方法：</h4><pre><code>1. 定义一个类实现Filter
+2. 复写方法
+3. 配置拦截路径</code></pre><p><strong>示例：</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.servlet.*;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.annotation.WebFilter;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="meta">@WebFilter</span>(<span class="string">"/*"</span>)<span class="comment">//访问所有资源之前，都会执行该过滤器</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FilterDemo</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest req, ServletResponse resp, FilterChain chain)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"该过滤器执行啦！！！"</span>);</span><br><span class="line">        chain.doFilter(req, resp);<span class="comment">//放行</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig config)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3、注意事项"><a href="#3、注意事项" class="headerlink" title="3、注意事项"></a>3、注意事项</h4><ol>
+<li><p>web.xml配置</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>demo1<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--引入类--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>top.rainbowcat.web.filter.FilterDemo1top.rainbowcat.web.filter.FilterDemo1<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>demo1<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--拦截路径--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>过滤器执行流程</p>
+<ol>
+<li>执行过滤器</li>
+<li>执行放行后的资源</li>
+<li>执行放行后的代码<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest req, ServletResponse resp, FilterChain chain)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">    <span class="comment">//该处对request对象请求消息进行增强</span></span><br><span class="line">    System.out.println(<span class="string">"该过滤器执行啦！！！"</span>);</span><br><span class="line">    chain.doFilter(req, resp);<span class="comment">//放行</span></span><br><span class="line">    <span class="comment">//该处对response对象响应消息进行增强</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p>过滤器生命周期方法</p>
+<ol>
+<li>init方法：服务器启动后，会创建Filter对象，调用init方法。用于加载资源。</li>
+<li>destroy方法：在服务器关闭后，Filter对象被销毁。如果服务器时正常关闭，则会执行destroy方法。用于释放资源。</li>
+<li>doFilter方法：每一次请求被拦截资源时会执行。</li>
+</ol>
+</li>
+<li><p>过滤器配置详解</p>
+<ol>
+<li><p>拦截路径的配置</p>
+<ul>
+<li>具体的资源路径，如：/index.jsp 只有访问index.jsp时，过滤器才会被执行</li>
+<li>拦截目录，如：/user/* 访问/user下的所有资源时，过滤器才会被执行</li>
+<li>后缀名拦截，如：*.jsp 访问所有后缀名为.jsp资源时，过滤器才会被执行</li>
+<li>拦截所有资源：/* 访问所有资源时，过滤器都会被执行</li>
+</ul>
+</li>
+<li><p>拦截方式的配置：资源被访问的方式</p>
+<ul>
+<li><p>注解配置<br>  *设置dispatchType属性</p>
+<pre><code>- REQUEST：默认值。浏览器直接请求资源
+- FORWARD：转发访问资源，只有转发访问到的资源会被拦截
+- INCLUDE：包含访问资源
+- ERROR：错误跳转资源
+- ASYNC：异步访问资源</code></pre><p>  <strong>示例：</strong></p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//访问所有资源之前，都会执行该过滤器</span></span><br><span class="line"><span class="meta">@WebFilter</span>(value = <span class="string">"/*"</span>, dispatcherTypes =DispatcherType.REQUEST)</span><br></pre></td></tr></table></figure></li>
+<li><p>web.xml配置<br>  只需增加<dispatcher>属性值</dispatcher>标签即可</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&lt;filter-mapping&gt;</span><br><span class="line">    &lt;filter-name&gt;demo1&lt;/filter-name&gt;</span><br><span class="line">    &lt;!--拦截路径--&gt;</span><br><span class="line">    &lt;url-pattern&gt;<span class="comment">/*&lt;/url-pattern&gt;</span></span><br><span class="line"><span class="comment">    &lt;dispatcher&gt;REQUEST&lt;/dispatcher&gt;</span></span><br><span class="line"><span class="comment">&lt;/filter-mapping&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>过滤器链（配置多个过滤器）</p>
+<ul>
+<li><p>执行顺序：如果有两个过滤器（过滤器1、过滤器2）<br>  过滤器1 –&gt; 过滤器2 –&gt; 资源执行 –&gt; 过滤器2 –&gt; 过滤器1<br>  <strong>示例：</strong><br>  第一个过滤器</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@WebFilter</span>(<span class="string">"/*"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FilterDemo1</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest req, ServletResponse resp, FilterChain chain)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"FilterDemo1执行啦！！！"</span>);</span><br><span class="line">        chain.doFilter(req, resp);<span class="comment">//放行</span></span><br><span class="line">        System.out.println(<span class="string">"FilterDemo1回来啦！！！"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig config)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第二个过滤器</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@WebFilter</span>(<span class="string">"/*"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FilterDemo2</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest req, ServletResponse resp, FilterChain chain)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="comment">//该处对request对象请求消息进行增强</span></span><br><span class="line">        System.out.println(<span class="string">"FilterDemo2执行啦！！！"</span>);</span><br><span class="line">        chain.doFilter(req, resp);<span class="comment">//放行</span></span><br><span class="line">        <span class="comment">//该处对response对象响应消息进行增强</span></span><br><span class="line">        System.out.println(<span class="string">"FilterDemo2回来啦！！！"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig config)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<blockquote>
+<p>FilterDemo1执行啦！！！<br>  FilterDemo2执行啦！！！<br>  FilterDemo2回来啦！！！<br>  FilterDemo1回来啦！！！</p>
+</blockquote>
+</li>
+<li><p>过滤器先后顺序问题：</p>
+<ul>
+<li>注解配置：按照类名的字符串比较规则比较，值小的先执行。<br>如：AFilter和BFilter，AFilter就先执行。</li>
+<li>web.xml配置：按照编写顺序从上到下执行。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h4><h5 id="登陆验证"><a href="#登陆验证" class="headerlink" title="登陆验证"></a>登陆验证</h5><p><strong>需求分析：</strong></p>
+<ol>
+<li>访问资源时验证是否登录</li>
+<li>如果已经登陆，直接放行</li>
+<li>没有登陆，则跳转到登陆页面</li>
+</ol>
+<p><strong>代码实现：</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest req, ServletResponse resp, FilterChain chain)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="comment">//强制转换</span></span><br><span class="line">        HttpServletRequest request = (HttpServletRequest) req;</span><br><span class="line">        <span class="comment">//1. 获取资源请求路径</span></span><br><span class="line">        String uri = request.getRequestURI();</span><br><span class="line">        <span class="comment">//2. 判断是否包含登陆相关的资源路径,要注意排除掉css/js/图片/验证码等资源</span></span><br><span class="line">        <span class="keyword">if</span> (uri.contains(<span class="string">"/login.jsp"</span>) || uri.contains(<span class="string">"/loginServlet"</span>) ||</span><br><span class="line">                uri.contains(<span class="string">"/css/"</span>) || uri.contains(<span class="string">"/js/"</span>) ||</span><br><span class="line">                uri.contains(<span class="string">"/fonts/"</span>) || uri.contains(<span class="string">"/checkCodeServlet"</span>))&#123;</span><br><span class="line">            <span class="comment">//包含，用户正要登陆，放行</span></span><br><span class="line">            chain.doFilter(req, resp);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//不包含，用户需要登陆验证</span></span><br><span class="line">            <span class="comment">//3. 从session中获取用户登陆信息</span></span><br><span class="line">            Object user = request.getSession().getAttribute(<span class="string">"user"</span>);</span><br><span class="line">            <span class="keyword">if</span> (user != <span class="keyword">null</span>)&#123;</span><br><span class="line">                <span class="comment">//登陆了，放行</span></span><br><span class="line">                chain.doFilter(req, resp);</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//没有登陆，跳转登陆页面</span></span><br><span class="line">                request.setAttribute(<span class="string">"login_msg"</span>, <span class="string">"您尚未登陆，请登陆！"</span>);</span><br><span class="line">                request.getRequestDispatcher(<span class="string">"login.jsp"</span>).forward(request, resp);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="敏感词汇过滤"><a href="#敏感词汇过滤" class="headerlink" title="敏感词汇过滤"></a>敏感词汇过滤</h5><p><strong>需求分析：</strong></p>
+<ol>
+<li>录入数据时验证是否含有敏感数据</li>
+<li>敏感词汇参考《敏感词汇.txt》</li>
+<li>如果有敏感词汇，替换为***</li>
+</ol>
+<p><strong>增强对象的功能：设计模式</strong></p>
+<ul>
+<li><p>设计模式：一些通用的解决固定问题的方式。</p>
+<ol>
+<li><p>装饰模式</p>
+</li>
+<li><p>代理模式</p>
+<ul>
+<li><p>概念：</p>
+<ol>
+<li>真实对象：被代理的对象</li>
+<li>代理对象：</li>
+<li>代理模式：代理对象代理真实对象，达到增强真实对象的目的。</li>
+</ol>
+</li>
+<li><p>实现方式：</p>
+<ol>
+<li>静态代理：有一个类文件藐视代理模式</li>
+<li>在内存中形成代理类<ul>
+<li>实现步骤：<ol>
+<li>代理对象和真实对象实现相同的接口</li>
+<li>代理对象 = Proxy.newProxyInstance();</li>
+<li>使用代理对象调用方法</li>
+<li>增强方法</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<p><strong>代码实现：</strong><br>过滤器部分</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 敏感词汇过滤器</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@WebFilter</span>(<span class="string">"/*"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SensitiveWordsFilter</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest req, ServletResponse resp, FilterChain chain)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="comment">//1.创建代理对象，增强getParameter方法</span></span><br><span class="line">        ServletRequest proxy_req = (ServletRequest) Proxy.newProxyInstance(req.getClass().getClassLoader(), req.getClass().getInterfaces(), <span class="keyword">new</span> InvocationHandler() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">                <span class="comment">//增强getParameter方法</span></span><br><span class="line">                <span class="comment">//判断是否时getParameter方法</span></span><br><span class="line">                <span class="keyword">if</span> (method.getName().equals(<span class="string">"getParameter"</span>))&#123;</span><br><span class="line">                    <span class="comment">//增强返回值</span></span><br><span class="line">                    <span class="comment">//获取返回值</span></span><br><span class="line">                    String value = (String) method.invoke(req, args);</span><br><span class="line">                    <span class="keyword">if</span> (value != <span class="keyword">null</span>)&#123;</span><br><span class="line">                        <span class="keyword">for</span> (String str : list)&#123;</span><br><span class="line">                            <span class="keyword">if</span> (value.contains(str))&#123;</span><br><span class="line">                                value = value.replace(str, <span class="string">"***"</span>);</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">return</span> value;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//判断方法是否为getParameterMap</span></span><br><span class="line">                <span class="comment">//判断方法是否为getParameterValue</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> method.invoke(req, args);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//2.放行,以定要用代理对象！！！而不是req</span></span><br><span class="line">        chain.doFilter(proxy_req, resp);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();<span class="comment">//敏感词汇集合</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig config)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="comment">//1.加载文件的真实路径</span></span><br><span class="line">            ServletContext servletContext = config.getServletContext();</span><br><span class="line">            String realPath = servletContext.getRealPath(<span class="string">"/WEB-INF/classes/敏感词汇.txt"</span>);</span><br><span class="line">            <span class="comment">//2.读取文件</span></span><br><span class="line">            BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(realPath));</span><br><span class="line">            <span class="comment">//3.将文件的每一行数据添加到list集合</span></span><br><span class="line">            String line = <span class="keyword">null</span>;</span><br><span class="line">            <span class="keyword">while</span> ((line = br.readLine())!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                list.add(line);</span><br><span class="line">            &#125;</span><br><span class="line">            br.close();</span><br><span class="line">            System.out.println(list);</span><br><span class="line">        &#125;<span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>测试代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@WebServlet</span>(<span class="string">"/textServlet"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TextServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        String name = request.getParameter(<span class="string">"name"</span>);</span><br><span class="line">        String msg = request.getParameter(<span class="string">"msg"</span>);</span><br><span class="line">        System.out.println(name+<span class="string">":"</span>+msg);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.doPost(request, response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在地址栏进行传参，控制台查看输出情况即可。</p>
+]]></content>
+      <categories>
+        <category>Filter</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>EL使用</title>
     <url>/2020/04/07/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
     <content><![CDATA[<h2 id="EL表达式"><a href="#EL表达式" class="headerlink" title="EL表达式"></a>EL表达式</h2><ol>
