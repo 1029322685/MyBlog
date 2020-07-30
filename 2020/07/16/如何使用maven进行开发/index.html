@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="什么是maven Maven简介Maven是项目进行模型抽象，充分运用面向对象思想，通过一小段描述信息来管理项目的构建，报告和文档的软件项目管理工具。Maven除了以程序构建能力为特色之外，还提供高级项目管理工具。下载地址：http:&#x2F;&#x2F;archive.apache.org&#x2F;dist&#x2F;maven&#x2F;maven-3&#x2F; Maven的主要作用 对第三方jar包的统一管理。意思其实就是通过本地仓库或者是远程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何使用maven进行开发">
+<meta property="og:url" content="http://yoursite.com/2020/07/16/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8maven%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:site_name" content="Leon&#39;s blog">
+<meta property="og:description" content="什么是maven Maven简介Maven是项目进行模型抽象，充分运用面向对象思想，通过一小段描述信息来管理项目的构建，报告和文档的软件项目管理工具。Maven除了以程序构建能力为特色之外，还提供高级项目管理工具。下载地址：http:&#x2F;&#x2F;archive.apache.org&#x2F;dist&#x2F;maven&#x2F;maven-3&#x2F; Maven的主要作用 对第三方jar包的统一管理。意思其实就是通过本地仓库或者是远程">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-16T09:14:20.000Z">
+<meta property="article:modified_time" content="2020-07-17T02:12:26.574Z">
+<meta property="article:author" content="Leon Wang">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>如何使用maven进行开发</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/categories/">分类</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2020/07/24/Maven%E4%BD%BF%E7%94%A8tomcat8%E6%8F%92%E4%BB%B6/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2020/07/16/Redis%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/07/16/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8maven%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/07/16/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8maven%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91/&text=如何使用maven进行开发" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/07/16/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8maven%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91/&title=如何使用maven进行开发" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/07/16/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8maven%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91/&is_video=false&description=如何使用maven进行开发" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=如何使用maven进行开发&body=Check out this article: http://yoursite.com/2020/07/16/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8maven%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/07/16/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8maven%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91/&title=如何使用maven进行开发" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/07/16/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8maven%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91/&title=如何使用maven进行开发" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/07/16/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8maven%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91/&title=如何使用maven进行开发" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/07/16/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8maven%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91/&title=如何使用maven进行开发" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/07/16/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8maven%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91/&name=如何使用maven进行开发&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://yoursite.com/2020/07/16/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8maven%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91/&t=如何使用maven进行开发" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是maven"><span class="toc-number">1.</span> <span class="toc-text">什么是maven</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#maven项目标准目录结构"><span class="toc-number">1.0.1.</span> <span class="toc-text">maven项目标准目录结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#maven项目常用命令"><span class="toc-number">1.0.2.</span> <span class="toc-text">maven项目常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#maven生命周期"><span class="toc-number">1.0.3.</span> <span class="toc-text">maven生命周期</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        如何使用maven进行开发
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Leon's blog</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-07-16T09:14:20.000Z" itemprop="datePublished">2020-07-16</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/maven/">maven</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="什么是maven"><a href="#什么是maven" class="headerlink" title="什么是maven"></a>什么是maven</h2><ol>
+<li>Maven简介<br>Maven是项目进行模型抽象，充分运用面向对象思想，通过一小段描述信息来管理项目的构建，报告和文档的软件项目管理工具。Maven除了以程序构建能力为特色之外，还提供高级项目管理工具。<br><br>下载地址：<a href="http://archive.apache.org/dist/maven/maven-3/" target="_blank" rel="noopener">http://archive.apache.org/dist/maven/maven-3/</a></li>
+<li>Maven的主要作用<ul>
+<li>对第三方jar包的统一管理。意思其实就是通过本地仓库或者是远程仓库更或者是中央仓库进行依赖管理，省去了导入jar包的操作。不过一般我们在配置Maven时会选择阿里的远程仓库，不会去连接中央仓库，因为太慢了，而且阿里不仅拥有中央仓库的所有jar包而且开源了自身许多有用的jar包，如数据库连接池jar包Druid(德鲁伊)。</li>
+<li>将项目分模块构建，提高开发效率。意思就是说使用Maven时，其构建项目时，会将包分好，方便工作人员协同开发，提高效率。</li>
+<li>Maven提供一套对项目生命周期管理的标准。意思是说，Maven为项目提供了许多有关jar包的作用域，作用范围，类的生命周期，运行范围。以及项目的编译，部署等都提供了很好的接口，只要配置下就好了。减少了开发人员思考这些无关紧要的东西，只要遵循Maven的标准就可以了。</li>
+</ul>
+</li>
+</ol>
+<h4 id="maven项目标准目录结构"><a href="#maven项目标准目录结构" class="headerlink" title="maven项目标准目录结构"></a>maven项目标准目录结构</h4><p>maven项目标准目录结构<br>src/main/java目录 核心代码部分。<br>src/main/resources 配置文件部分。<br>src/test/java目录测试代码部分。<br>src/test/resources测试配置文件。<br>src/main/webapp页面资源，js, CSs,图片等等</p>
+<h4 id="maven项目常用命令"><a href="#maven项目常用命令" class="headerlink" title="maven项目常用命令"></a>maven项目常用命令</h4><p>在项目的目录下：<br>mvn clean：清除项目编译文件<br>mvn compile：将src/main下的文件进行编译<br>mvn test：将src/main、src/test下的文件进行编译<br>mvn package：对项目进行打包<br>mvn install：执行除了clean以外的操作，同时还将项目安装到本地仓库<br>mvn deploy：发布项目</p>
+<h4 id="maven生命周期"><a href="#maven生命周期" class="headerlink" title="maven生命周期"></a>maven生命周期</h4><table>
+  <tr>
+    <th align=center>清除编译信息</th>
+    <th align=center>编译</th>
+    <th align=center>测试</th>
+    <th align=center>打包</th>
+    <th align=center>安装</th>
+    <th align=center>发布</th>
+    <td rowspan="2"></td>
+  </tr>
+  <tr>
+    <td align=center>clean</td>
+    <td align=center>compile</td>
+    <td align=center>test</td>
+    <td align=center>package</td>
+    <td align=center>install</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td align=center>
+      清理生命周期
+    </td>
+    <td colspan="5" align=center>
+      默认生命周期
+    </td>
+    <td colspan="5" align=center>
+      站点生命周期
+    </td>
+  </tr>
+</table>
+#### IDEA集成maven插件
+IDEA主界面当中，点击configure-settings
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">  &lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt; javax.servlet&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;servlet-api&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.5&lt;&#x2F;version</span><br><span class="line">    &lt;scope&gt;provided&lt;&#x2F;scope&gt; &#x2F;&#x2F;解决jar包冲突，只在编译的时候起作用，项目运行时不起作用（test：只在测试时有用）</span><br><span class="line">  &lt;&#x2F;dependency&gt;</span><br><span class="line">&lt;dependencies&gt;</span><br></pre></td></tr></table></figure>
+## 配置自己的maven骨架
+阿里云镜像：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;mirror&gt;</span><br><span class="line">    &lt;id&gt;nexus-aliyun&lt;&#x2F;id&gt;</span><br><span class="line">    &lt;mirrorOf&gt;central&lt;&#x2F;mirrorOf&gt;</span><br><span class="line">    &lt;name&gt;Nexus aliyun&lt;&#x2F;name&gt;</span><br><span class="line">    &lt;url&gt;http:&#x2F;&#x2F;maven.aliyun.com&#x2F;nexus&#x2F;content&#x2F;groups&#x2F;public&lt;&#x2F;url&gt;</span><br><span class="line">&lt;&#x2F;mirror&gt;</span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/categories/">分类</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是maven"><span class="toc-number">1.</span> <span class="toc-text">什么是maven</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#maven项目标准目录结构"><span class="toc-number">1.0.1.</span> <span class="toc-text">maven项目标准目录结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#maven项目常用命令"><span class="toc-number">1.0.2.</span> <span class="toc-text">maven项目常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#maven生命周期"><span class="toc-number">1.0.3.</span> <span class="toc-text">maven生命周期</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/07/16/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8maven%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/07/16/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8maven%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91/&text=如何使用maven进行开发" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/07/16/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8maven%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91/&title=如何使用maven进行开发" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/07/16/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8maven%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91/&is_video=false&description=如何使用maven进行开发" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=如何使用maven进行开发&body=Check out this article: http://yoursite.com/2020/07/16/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8maven%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/07/16/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8maven%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91/&title=如何使用maven进行开发" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/07/16/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8maven%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91/&title=如何使用maven进行开发" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/07/16/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8maven%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91/&title=如何使用maven进行开发" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/07/16/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8maven%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91/&title=如何使用maven进行开发" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/07/16/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8maven%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91/&name=如何使用maven进行开发&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://yoursite.com/2020/07/16/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8maven%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91/&t=如何使用maven进行开发" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2020
+    Leon Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/categories/">分类</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
