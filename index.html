@@ -154,20 +154,20 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Maven依赖冲突" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-ArchLinux安装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/23/Maven%E4%BE%9D%E8%B5%96%E5%86%B2%E7%AA%81/">Maven依赖冲突</a>
+      <a class="article-title" href="/2020/11/28/ArchLinux%E5%AE%89%E8%A3%85/">ArchLinux安装</a>
     </h1>
   
 
         
-        <a href="/2020/10/23/Maven%E4%BE%9D%E8%B5%96%E5%86%B2%E7%AA%81/" class="archive-article-date">
-  	<time datetime="2020-10-23T07:58:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-23</time>
+        <a href="/2020/11/28/ArchLinux%E5%AE%89%E8%A3%85/" class="archive-article-date">
+  	<time datetime="2020-11-28T13:48:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-28</time>
 </a>
         
 
@@ -179,7 +179,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">572字</span>
+        <span class="post-count">2.5k字</span>
       </span>
     </span>
 
@@ -188,7 +188,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">2分</span>
+        <span class="post-count">10分</span>
       </span>
     </span>
 </div>
@@ -200,22 +200,251 @@
     <div class="article-entry" itemprop="articleBody">
 
       
-        <h2 id="maven依赖冲突"><a href="#maven依赖冲突" class="headerlink" title="maven依赖冲突"></a>maven依赖冲突</h2><p>由于依赖传递现象的存在，spring-webmvc-4.24依赖spring-beans-4.2.4, spring-aop-5.0.2依赖spring-beans-5.0.2,但是发现spring-beans-4.2.4加入到了工程中,而我们希望spring-beans-5.0.2加入工程。这就造成了依赖冲突。</p>
-<h2 id="如何解决maven依赖冲突"><a href="#如何解决maven依赖冲突" class="headerlink" title="如何解决maven依赖冲突"></a>如何解决maven依赖冲突</h2><h4 id="使用maven提供的依赖调解原则"><a href="#使用maven提供的依赖调解原则" class="headerlink" title="使用maven提供的依赖调解原则"></a>使用maven提供的依赖调解原则</h4><ol>
-<li>第一声明者优先原则：在pom文件中定义依赖，以先声明的依赖为准。其实就是根据坐标导入的顺序来确定最终使用哪个传递过来的依赖。</li>
-<li>路径近者优先原则：在pom文件定义依赖，以路径近者为准。<br>还是上述情况, spring-aop和spring-webmvc都会传递过来spring-beans,那如果直接把spring-beans的依赖直接写到pom文件中,那么项目就不会再使用其他依赖传递来的spring- beans,因为自己直接在pom中定义spring-beans要比其他依赖传递过来的路径要近。</li>
+        <p>参考博客：<br><a href="https://kagarinokiriestudio.github.io/ArchLinuxTutorial/#/rookie/basic_install" target="_blank" rel="noopener">https://kagarinokiriestudio.github.io/ArchLinuxTutorial/#/rookie/basic_install</a></p>
+<p>Arch Linux 基础安装十九步<br>从安装最基础的 ArchLinux 系统开始，由于当前已经是 2020 年，安装将全部以 UEFI+GPT 的形式进行。传统方式不再赘述。<br>官方文档: 安装指南<br>相关视频链接： 2020ArchLinux 安装教程 视频中可看到全部操作步骤 强烈建议观看视频配合文字学习</p>
+<p>1.刻录启动优盘<br>准备一个 2G 以上的优盘，刻录一个安装启动盘。</p>
+<p>Linux 下可以直接用 dd 命令进行刻录</p>
+<p>dd bs=4M if=/path/to/archlinux.iso of=/dev/sdx status=progress oflag=sync<br>bs=4M 指定一个较为合理的文件输入输出块大小。<br>status=progress 用来输出刻录过程总的信息。<br>oflag=sync 用来控制写入数据时的行为特征。确保命令结束时数据及元数据真正写入磁盘，而不是刚写入缓存就返回。</p>
+<p>Windows 下推荐使用Power ISO或者Rufus进行光盘刻录。二者皆为免费使用的软件。具体操作请自行查阅，都非常简单。</p>
+<p>2.检测是否为 UEFI<br>ls /sys/firmware/efi/efivars<br>若输出了一堆东西，说明已在 UEFI 模式。否则请确认你的启动方式是否为 UEFI。<br>3.连接网络<br>无线连接:</p>
+<p>iwctl                           #进入交互式命令行<br>device list                     #列出设备名，比如无线网卡看到叫 wlan0<br>station wlan0 scan              #扫描网络<br>station wlan0 get-networks      #列出网络 比如想连接CMCC-5AQ7这个无线<br>station wlan0 connect CMCC-5AQ7 #进行连接 输入密码即可<br>exit                            #成功后exit退出<br>有线连接:<br>正常来说，只要插上一个已经联网的路由器分出的网线(DHCP)，直接就能联网。若不行可以尝试输入如下命令再看看</p>
+<p>systemctl start dhcpcd<br>4.测试网络<br>ping <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a><br>若能看到数据返回，即说明已经联网，ctrl+c 终止退出当前命令。</p>
+<p>5.更新系统时钟<br>timedatectl set-ntp true    #将系统时间与网络时间进行同步<br>timedatectl status          #检查服务状态<br>6.更换国内镜像源加快下载速度<br>vim /etc/pacman.d/mirrorlist    #不会vim的同学，此处注意视频中的vim操作步骤<br>放在最上面的是会使用的更新源,把中科大 ustc 的或者清华的放在最上面</p>
+<p>7.分区<br>这里总共设置四个分区，可以满足绝大多数人的需求</p>
+<p>根目录： /<br>用户主目录： /home<br>EFI： /boot/EFI<br>交换分区: swap</p>
+<p>lsblk                       #显示分区情况<br>parted /dev/sdx             #执行parted，进行磁盘类型变更<br>(parted)mktable<br>New disk label type? gpt    #输入gpt 将磁盘类型转换为gpt<br>quit                        #最后quit退出parted命令行交互</p>
+<p>fdisk /dev/sda              #进入fdisk工具对磁盘进行操作<br>g                           #创建gpt格式分区表<br>n                           #创建新的分区（Partition number设置为1，敲两次回车）<br>+300m                       #300MB大小的分区（boot分区）<br>+2g                         #swap分区（剩下的可以设置home和跟目录的大小）<br>p                           #输出分区表信息<br>t                           #修改分区的Type（此处的1设置为EFI System，3设置为Linux swap）<br>w                           #写入保存<br>fdisk -l                    #复查<br>8.格式化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mkfs.vfat  &#x2F;dev&#x2F;sda1            #efi分区  挂载在&#x2F;mnt&#x2F;boot&#x2F;EFI    300m</span><br><span class="line">mkfs.ext4  &#x2F;dev&#x2F;sda2            #&#x2F;分区</span><br><span class="line">mkfs.ext4  &#x2F;dev&#x2F;sda3            #&#x2F;home分区</span><br><span class="line">#磁盘若有数据会问 &#39;proceed any way?&#39; y回车 即可</span><br><span class="line">mkswap -f &#x2F;dev&#x2F;sda4             #格式化swap</span><br><span class="line">swapon &#x2F;dev&#x2F;sda4               #打开swap分区</span><br></pre></td></tr></table></figure>
+<p>9.挂载<br>在挂载时，挂载是有顺序的，需要从根目录开始挂载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mount &#x2F;dev&#x2F;sda2  &#x2F;mnt</span><br><span class="line">mkdir &#x2F;mnt&#x2F;home</span><br><span class="line">mount &#x2F;dev&#x2F;sda3 &#x2F;mnt&#x2F;home</span><br><span class="line">mkdir -p &#x2F;mnt&#x2F;boot&#x2F;EFI</span><br><span class="line">mount &#x2F;dev&#x2F;sda1 &#x2F;mnt&#x2F;boot&#x2F;EFI</span><br></pre></td></tr></table></figure>
+<p>10.安装系统<br>基础包<br><code>pacstrap /mnt base base-devel linux linux-firmware #base-devel在某些AUR包的安装是必须的</code><br>功能性软件<br><code>pacstrap /mnt dhcpcd iwd vim sudo                #一个有线所需 一个无线所需 一个编辑器  iwd也需要dhcpcd</code><br>11.生产 fstab<br>fstab 用来定义磁盘分区<br><code>genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</code><br>复查一下 /mnt/etc/fstab 确保没有错误<br><code>cat /mnt/etc/fstab</code><br>12.change root<br>把环境切换到新系统的/mnt 下</p>
+<p><code>arch-chroot /mnt</code><br>13.时区<br><code>ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime     #为/usr下合适的时区在/etc下创建符号连接</code><br>14.硬件时间设置<br>将系统时间同步到硬件时间</p>
+<p><code>hwclock --systohc</code><br>15.设置 Locale<br>Locale 决定了软件使用的语言、书写习惯和字符集。<br>编辑 <code>/etc/locale.gen</code>，去掉 en_US.UTF-8 行的注释符号（#）。<br>然后使用如下命令生成 locale。<br><code>locale-gen</code><br>向 /etc/locale.conf 输入内容<br><code>echo &#39;LANG=en_US.UTF-8&#39;  &gt; /etc/locale.conf</code><br>16.为 root 用户设置密码<br><code>passwd root</code><br>17.安装微码<br><code>pacman -S intel-ucode   #Intel</code><br><code>pacman -S amd-ucode     #AMD</code><br>18.安装引导程序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pacman -S grub efibootmgr   #grub是启动引导器，efibootmgr被 grub 脚本用来将启动项写入 NVRAM。</span><br><span class="line">grub-install --target&#x3D;x86_64-efi --efi-directory&#x3D;&#x2F;boot&#x2F;EFI --bootloader-id&#x3D;GRUB #取名为GRUB 并将grubx64.efi安装到之前的指定位置</span><br><span class="line">grub-mkconfig -o &#x2F;boot&#x2F;grub&#x2F;grub.cfg    #生成GRUB所需的配置文件</span><br></pre></td></tr></table></figure>
+<p>19.完成安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">exit                # 退回安装环境#</span><br><span class="line">umount -R  &#x2F;mnt     # 卸载新分区</span><br><span class="line">reboot              # 重启</span><br></pre></td></tr></table></figure>
+<p>重启后，开启 dhcp 服务，即可连接网络</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable dhcpcd #开机自动启动dhcp</span><br><span class="line">systemctl start dhcpcd  #立即启动dhcp</span><br><span class="line">ping www.baidu.com      #测试网络连接</span><br></pre></td></tr></table></figure>
+<p>若为无线链接，则需要启动 iwd 才可以使用 iwctl 连接网络</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start iwd #立即启动iwd</span><br><span class="line">iwctl               #和之前的方式一样，连接无线网络</span><br></pre></td></tr></table></figure>
+<p>到此基础安装已经完成</p>
+<p>1.确保系统为最新<br><code>pacman -Syyu    #升级系统中全部包</code><br>2.准备非 root 用户<br>添加用户，比如新增加的用户叫 wallen<br><code>useradd -m -g users -G wheel -s /bin/bash wallen  #wheel附加组可sudo进行提权</code><br>设置新用户 wallen 的密码<br><code>passwd wallen</code><br>编辑 sudo 文件<br><code>EDITOR=vim visudo</code><br>找到这样的一行,把前面的注释符号#去掉，:wq保存并退出即可。<br><code>#%wheel ALL=(ALL) ALL</code><br>这里稍微解释一下 %wheel 代表是 wheel 组，百分号是前缀</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ALL&#x3D; 代表在所有主机上都生效(如果把同样的sudoers文件下发到了多个主机上)</span><br><span class="line">(ALL) 代表可以成为任意目标用户</span><br><span class="line">ALL 代表可以执行任意命令</span><br></pre></td></tr></table></figure>
+<p>一个更详细的例子:</p>
+<p><code>%mailadmin   snow,rain=(root) /usr/sbin/postfix, /usr/sbin/postsuper, /usr/bin/doveadm</code><br><code>nobody       ALL=(root) NOPASSWD: /usr/sbin/rndc reload</code><br>组 mailadmin 可以作为 root 用户，执行一些邮件服务器控制命令。可以在 “snow” 和 “rain”这两台主机上执行<br>用户 nobody 可以以 root 用户执行rndc reload命令。可以在所有主机上执行。同时可以不输入密码。(正常来说 sudo 都是要求输入调用方的密码的)</p>
+<p>3.安装 KDE Plasma 桌面环境<br><code>pacman -S plasma-meta konsole dolphin bash-completion #安装plasma-meta元软件包 直接回车回车</code><br>4.配置 greeter sddm（开机欢迎界面）<br><code>systemctl enable sddm</code><br>5.开启 32 位支持库与 ArchLinuxCN 支持库<br><code>sudo vim /etc/pacman.conf</code><br>去掉[multilib]一节中两行的注释，来开启 32 位库支持。<br>在文档结尾处加入下面的文字，来开启 ArchLinuxCN 源。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[archlinuxcn]</span><br><span class="line">Server &#x3D; http:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;archlinuxcn&#x2F;$arch</span><br></pre></td></tr></table></figure>
+<p>上面服务器的地址是清华的，也可用下面中科大的<br><code>Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch</code><br>最后:wq 保存退出，刷新 pacman 数据库<br><code>sudo pacman -Syyu</code><br>重启电脑，即可看到欢迎界面，输入新用户的密码即可登录桌面</p>
+<p>6.安装基础功能包<br>进入桌面后，搜索 konsole。它是 KDE 桌面环境默认的命令行终端。<br>接下来我们安装一些基础功能包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl disable iwd                                                  #确保iwd处于关闭状态，其无线连接会与NetworkManager冲突</span><br><span class="line">sudo systemctl stop iwd                                                     #同上</span><br><span class="line">sudo systemctl enable --now NetworkManager                                  #确保先启动NetworkManager，并进行网络连接</span><br><span class="line">sudo pacman -S ntfs-3g                                                      #识别NTFS格式的硬盘</span><br><span class="line">sudo pacman -S adobe-source-han-serif-cn-fonts wqy-zenhei                   #安装几个开源中文字体</span><br><span class="line">sudo pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra  #安装谷歌开源字体</span><br><span class="line">sudo pacman -S firefox chromium                                             #安装常用的火狐、谷歌浏览器</span><br><span class="line">sudo pacman -S archlinuxcn-keyring                                          #cn源中的签名</span><br><span class="line">sudo pacman -S yay                                                          #yay命令可以让用户安装AUR中的软件(yay在archLinuxCn)</span><br></pre></td></tr></table></figure>
+<p>7.设置系统为中文<br>打开 系统设置 &gt; 区域设置 &gt; 语言 中加入中文，重新登陆即可。</p>
+<p>8.安装输入法<br>Fcitx5 官方文档<br>中文及日文输入法均体验良好。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S fcitx5-im #基础包组</span><br><span class="line">sudo pacman -S fcitx5-chinese-addons #官方中文输入引擎</span><br><span class="line">sudo pacman -S fcitx5-pinyin-moegirl #萌娘百科词库 二刺猿必备(ArchLinuxCn)</span><br><span class="line">sudo pacman -S fcitx5-material-color #主题</span><br></pre></td></tr></table></figure>
+<p>设置环境变量 编辑文件 <code>vim ~/.pam_environment</code> 加入以下内容。konsole 以及 dophin 都需要这些环境变量，倒是 chrome 和 firefox 都不需要就可以输入中文</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">INPUT_METHOD DEFAULT&#x3D;fcitx5</span><br><span class="line">GTK_IM_MODULE DEFAULT&#x3D;fcitx5</span><br><span class="line">QT_IM_MODULE DEFAULT&#x3D;fcitx5</span><br><span class="line">XMODIFIERS DEFAULT&#x3D;\@im&#x3D;fcitx5</span><br></pre></td></tr></table></figure>
+<p>打开 系统设置 &gt; 区域设置 &gt; 输入法</p>
+<p>点击添加输入法，找到简体中文下的 Pinyin ，点击添加</p>
+<p>找到 配置附加组件 拉到下面找到 Pinyin 点选云拼音和在程序中显示预编辑文本 最后应用<br>找到 classic user interface 在主题里选择一个你喜欢的颜色 最后应用</p>
+<p>注销，重新登陆，就可以发现已经可以在各个软件中输入中文了</p>
+<h1 id="解决VMware-tools无法安装"><a href="#解决VMware-tools无法安装" class="headerlink" title="解决VMware tools无法安装"></a>解决VMware tools无法安装</h1><p>原因：安装的open-vm-tools与VMware不匹配<br>1、卸载open-vm-tools<br><code>sudo pacman -R open-vm-tools</code><br>2、下载vmwaretools补丁<br><code>git clone https://github.com/rasa/vmware-tools-patches.git</code><br>3、进入vmware-tools-patches目录<br><code>cd vmware-tools-patches</code><br>4、运行补丁<br><code>sudo ./patched-open-vm-tools.sh</code><br>5、重启<br><code>reboot</code></p>
+<h1 id="避坑指南"><a href="#避坑指南" class="headerlink" title="避坑指南"></a>避坑指南</h1><h2 id="系统更新时："><a href="#系统更新时：" class="headerlink" title="系统更新时："></a>系统更新时：</h2><ol>
+<li>磁盘空间不足<br>清理软件包：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Sc</span><br><span class="line">sudo pacman -Scc</span><br></pre></td></tr></table></figure></li>
+<li>想阻止某个软件包更新<br>我们去/etc/pacman.conf中查找<code>＃IgnorePkg　=</code>，在后面添加软件包名<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">IgnorePkg　&#x3D; fctic5-*                 #多个软件包用空格隔开</span><br><span class="line">IgnoreGroup &#x3D; xfce4                   #不升级软件包组</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
-<h4 id="排除依赖"><a href="#排除依赖" class="headerlink" title="排除依赖"></a>排除依赖</h4><p>可以使用exclusions标签将传递过来的依赖排除出去</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-webmvc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.0.5.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 排除依赖 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-beans<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h4 id="锁定版本"><a href="#锁定版本" class="headerlink" title="锁定版本"></a>锁定版本</h4><p>采用直接锁定版本的方法确定依赖jar包的版本,版本锁定后则不考虑依赖的声明顺序或依赖的路径,以锁定的版本为准添加到工程中，此方法在企业开发中经常使用。</p>
-<p>版本锁定的使用方式:<br>第一步:在dependencyManagement标签中锁定依赖的版本<br>第二步:在dependencies标签中声明需要导入的maven坐标</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--依赖jar包版本锁定，并不会真正导入--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependencyManagement</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-beans<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.0.5.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencyManagement</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--由于已经在dependencyManagement锁定了版本，此处无需在指定version--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-beans<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">环境搭建</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/ArchLinux/" class="article-tag-list-link color5">ArchLinux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/28/ArchLinux%E5%AE%89%E8%A3%85/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
 
 
 
 
 
 
+
+
+  
+    <article id="post-Git使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/18/Git%E4%BD%BF%E7%94%A8/">Git使用</a>
+    </h1>
+  
+
+        
+        <a href="/2020/10/18/Git%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+  	<time datetime="2020-10-18T02:01:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-18</time>
+</a>
+        
+
+        
+        <span class="archive-article-date">
+            
+              <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">2.3k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">8分</span>
+      </span>
+    </span>
+</div>
+            
+        </span>
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+
+      
+        <h2 id="Git概述"><a href="#Git概述" class="headerlink" title="Git概述"></a>Git概述</h2><p>Git是分布式版本控制系统(Distributed Version Control System,简称DVCS).分为两种类型的仓库:<br>本地仓库和远程仓库.</p>
+<ul>
+<li><p>本地仓库: 是在开发人员自己电脑上的Git仓库</p>
+</li>
+<li><p>远程仓库: 是在远程服务器上的Git仓库</p>
+</li>
+<li><p>Clone:克隆，就是将远程仓库复制到本地</p>
+</li>
+<li><p>Push:推送，就是将本地仓库代码上传到远程仓库</p>
+</li>
+<li><p>Pull:拉取，就是将远程仓库代码下载到本地仓库</p>
+</li>
+</ul>
+<p>下载地址：<a href="https://git-scm.com/download" target="_blank" rel="noopener">https://git-scm.com/download</a></p>
+<h4 id="工作流程如下"><a href="#工作流程如下" class="headerlink" title="工作流程如下:"></a>工作流程如下:</h4><p>1.从远程仓库中克隆代码到本地仓库<br>2.从本地仓库中checkout代码然后进行代码修改<br>3.在提交前先将代码提交到暂存区<br>4.提交到本地仓库。本地仓库中保存修改的各个历史版本<br><img src="../images/git/git_1.png" alt="图片加载失败！"></p>
+<h2 id="Git代码托管服务"><a href="#Git代码托管服务" class="headerlink" title="Git代码托管服务"></a>Git代码托管服务</h2><h4 id="常用的Git代码托管服务"><a href="#常用的Git代码托管服务" class="headerlink" title="常用的Git代码托管服务"></a>常用的Git代码托管服务</h4><p>前面我们已经知道了Git中存在两种类型的仓库，即本地仓库和远程仓库。那么我们如何搭建Git远程仓库呢?我们可以借助互联网上提供的一些代码托管服务来实现，其中比较常用的有GitHub.码云、GitLab等。</p>
+<ul>
+<li>gitHub (地址: <a href="https://github.com/" target="_blank" rel="noopener">https://github.com/</a>) 是一个面向开源及私有软件项目的托管平台，因为只支持Git作为唯一的版本库格式进行托管,故名gitHub</li>
+<li>码云(地址: <a href="https://gitee.com/" target="_blank" rel="noopener">https://gitee.com/</a>) 是国内的一个代码托管平台，由于服务器在国内，所以相比于GitHub,码云速度会更快</li>
+<li>GitLab (地址: <a href="https://about.gitlab.com/" target="_blank" rel="noopener">https://about.gitlab.com/</a>) 是一个用于仓库管理系统的开源项目,使用Git作为代码管理工具,并在此基础上搭建起来的web服务</li>
+</ul>
+<h4 id="Git常用命令"><a href="#Git常用命令" class="headerlink" title="Git常用命令"></a>Git常用命令</h4><h6 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h6><p>当安装Git后首先要做的事情是设用户名称和email地处。这是非常重要的，因为每次Git提交都会使用该用户信息。</p>
+<ol>
+<li><p>设置用户信息<br>git config –global user.name “itcast”<br>git config –global user.email “<a href="mailto:hello@itcast.cn">hello@itcast.cn</a>“</p>
+</li>
+<li><p>查看配置信息<br>git config –list<br>git config user.name</p>
+</li>
+</ol>
+<p><strong>通过上面的命令设置的信息会保存在~/.gitconfig文件中</strong></p>
+<h6 id="获取git仓库"><a href="#获取git仓库" class="headerlink" title="获取git仓库"></a>获取git仓库</h6><p>要使用Git对我们的代码进行版本控制，首先需要获得Git仓库<br>获取Git仓库通常有两种方式:<br>1.在本地初始化一个Git仓库<br>    - 首先进入仓库目录（若没有需新建）<br>    - git init</p>
+<ol start="2">
+<li>从远程仓库克隆<ul>
+<li>git clone 远程仓库地址</li>
+</ul>
+</li>
+</ol>
+<h6 id="工作目录、暂存区以及版本库概念"><a href="#工作目录、暂存区以及版本库概念" class="headerlink" title="工作目录、暂存区以及版本库概念"></a>工作目录、暂存区以及版本库概念</h6><p>版本库:前面看到的.git隐藏文件夹就是版本库，版本库中存储了很多配信息日志信息和文件版本信息等<br>工作目录(工作区) :包含.git文件夹的目录就是工作目录，主要用于存放开发的代码<br>暂存区: .git文件夹中有很多文件,其中有一个index文件就是暂存区, 也可以叫做stage.暂存区是-个临时保存修改文件的地方<br><img src="../images/git/git_2.png" alt="图片加载失败！"></p>
+<h6 id="Git工作目录下文件的两种状态"><a href="#Git工作目录下文件的两种状态" class="headerlink" title="Git工作目录下文件的两种状态"></a>Git工作目录下文件的两种状态</h6><p>Git工作目录下的文件存在两种状态:</p>
+<ol>
+<li>untracked未跟踪(未被纳入版本控制)</li>
+<li>tracked已跟踪(被纳入版本控制)<ul>
+<li>Unmodified末修改状态</li>
+<li>Modified已修改状态</li>
+<li>Staged已暂存状态</li>
+</ul>
+</li>
+</ol>
+<p>这些文件的状态会随着我们执行Git的命令发生变化</p>
+<h6 id="本地仓库操作"><a href="#本地仓库操作" class="headerlink" title="本地仓库操作"></a>本地仓库操作</h6><ul>
+<li><strong>git status</strong>：查看文件状态</li>
+<li><strong>git status -s</strong>：使输出信息更加简洁</li>
+<li><strong>git add hello.txt</strong>：将未跟踪的文件加入暂存区</li>
+<li><strong>git reset hello.txt</strong>：将暂存区的文件取消暂存</li>
+<li><strong>git commit -m “init hello.txt”</strong>：<strong>将暂存区的文件</strong>修改提交到本地仓库（-m后的参数是日志信息，可以任意写）</li>
+<li><strong>git rm</strong>：删除文件（只是删除工作区的文件，需要commit提交）</li>
+<li>git log：查看日志记录</li>
+</ul>
+<p>将文件添加至忽略列表<br>一般我们总会有些文件无需纳入Git的管理，也不希望它们总出现在未跟踪文件列表。通常都是些自动生成的文件,比如日志文件，或者编译过程中创建的临时文件等。在这种情况下，我们可以在工作目录中创建一个名为 .gitignore的文件(文件名称固定)，列出要忽略的文件模式。下面是一个示例: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># no .a files</span><br><span class="line">*.a</span><br><span class="line"># but do track lib.a, even though you&#39;re ignoring .a files above</span><br><span class="line">!lib.a</span><br><span class="line"># only ignore the TODO file in the current directory, not subdir&#x2F; TODO</span><br><span class="line">&#x2F;TODO</span><br><span class="line"># ignore all files in the build&#x2F; directory </span><br><span class="line">build&#x2F;</span><br><span class="line"># ignore doc&#x2F;notes. txt， but not doc&#x2F;server&#x2F;arch. txt</span><br><span class="line">doc&#x2F;*.txt</span><br><span class="line"># ignore all .pdf files in the doc&#x2F; directory</span><br><span class="line">doc&#x2F;**&#x2F;*.pdf</span><br></pre></td></tr></table></figure>
+
+<h6 id="远程仓库操作"><a href="#远程仓库操作" class="headerlink" title="远程仓库操作"></a>远程仓库操作</h6><ol>
+<li>git remote：查看远程仓库<br> 如果想查看已经配置的远程仓库服务器可以运行<code>git remote</code>命令(git remote -v)。它会列出指定的每一个远程服务器的简写。<br> 如果已经克隆了远程仓库，那么至少应该能看到<strong>origin</strong>,这是Git克隆的仓库服务器的默认名字。</li>
+<li>git remote add shortname url：添加一个新的远程Git仓库,同时指定一个可以引用的简写</li>
+<li>git clone url：从远程仓库克隆</li>
+<li>git remote rm shortname：移除无效的远程仓库(仅移除本地仓库，远程的并不影响)</li>
+<li>从远程仓库中抓取与拉取<ul>
+<li>git fetch是从远程仓库获取最新版本到本地仓库，不会自动merge</li>
+<li>git pull是从远程仓库获取最新版本井merge到本地仓库</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mkdir repo1</span><br><span class="line">cd  repo1</span><br><span class="line">git init</span><br><span class="line">&#x2F;&#x2F;首先关联远程仓库</span><br><span class="line">git remote add origin https:&#x2F;&#x2F;github.com&#x2F;****.github.io.git</span><br><span class="line">&#x2F;&#x2F;抓取（默认是origin）</span><br><span class="line">git featch</span><br><span class="line">&#x2F;&#x2F;抓取（默认是origin）</span><br><span class="line">git featch origin master</span><br><span class="line">&#x2F;&#x2F;手动合并</span><br><span class="line">git merge origin&#x2F;master</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;拉取（不需要手动合并）</span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
+<p>注意:如果当前本地仓库不是从远程仓库克隆，而是本地创建的仓库,并且仓库中存在文件，此时再从远程仓库拉取文件的时候会报<br>错(fatal: refusing to merge unrelated histories) , 解决此问题可以在git pull命令后加入参数-allow-unrelated-histories<br>6. git push [remote-name] [branch-name]：推送到远程仓库（把本地分支branch-name推送到远程仓库地址remote-name）</p>
+<h6 id="Git分支"><a href="#Git分支" class="headerlink" title="Git分支"></a>Git分支</h6><p>几乎所有的版本控制系统都以某种形式支持分支。使用分支意味着你可以把你的工作从开发主线上分离开来，以免影响开发主线。Git 的master分支并不是一一个特殊分支。 它跟其它分支没有区别。之所以几乎每一个仓库都有master分支,是因为git init命令默认创建它,并且大多数人都懒得去改动它。<br>分支的相关命令具体如下:</p>
+<ul>
+<li><strong>git branch</strong>：查看本地分支</li>
+<li><strong>git branch -f</strong>：列出所有远程分支</li>
+<li><strong>git branch -a</strong>：列出所有本地和远程分支</li>
+<li><strong>git branch b1</strong>：创建分支（以当前所在分支为基础进行创建）</li>
+<li><strong>git checkout b1</strong>：切换分支</li>
+<li><strong>git push origin b1</strong>：推送分支到远程仓库</li>
+<li><strong>git merge b1</strong>：把b1分支合并到master分支（首先要cd到master分支下）。如果合并失败，需要手动修改冲突的文件，并使用<code>git add</code>命令标识冲突已解决</li>
+<li><strong>git branch -d b1</strong>：删除分支（如果要删除的分支中进行了一些开发动作, 此时执行上面的删除命令并不会删除分支,如果坚持要删除此分支,可以将命令中的-d参数改为-D）</li>
+<li><strong>git push origin -d branchName</strong>：删除远程仓库的分支</li>
+</ul>
+<h6 id="Git标签"><a href="#Git标签" class="headerlink" title="Git标签"></a>Git标签</h6><p>像其他版本控制系统(VCS)一样, Git 可以给历史中的某一个提交打上标签,以示重要。比较有代表性的是人们会使用这个功能来标记发布结点(v1.0、v1.2等)。标签指的是某个分支某个特定时间点的状态。通过标签,可以很方便的切换到标记时的状态。<br>    - <strong>git tag</strong>：查看标签<br>    - <strong>git tag [tagname]</strong>：创建标签（一般使用版本号）<br>    - <strong>git show [tagname]</strong>：查看tag信息<br>    - <strong>git push [remote] [tag]</strong>：将指定标签推送至远程仓库<br>    - <strong>git checkout -b [branch] [tag]</strong>：检出标签（新建一个分支，指向某个tag，即可在这个标签的基础上进行开发）<br>    - <strong>git tag -d [tag]</strong>：删除本地标签<br>    - <strong>git push origin :refs/tags/[tag]</strong>：删除本地标签</p>
+<h2 id="在IDEA中使用Git"><a href="#在IDEA中使用Git" class="headerlink" title="在IDEA中使用Git"></a>在IDEA中使用Git</h2><h4 id="在IDEA中配置Git"><a href="#在IDEA中配置Git" class="headerlink" title="在IDEA中配置Git"></a>在IDEA中配置Git</h4><p>安装好ItellijJIDEA后，如果Git安装在默认路径下，那么idea会自动找到git的位置，如果更改了Git的安装位置则需要手动配置FGit的路径。<br>选择File–&gt;Settings打开设置窗口，找到Version Control下的git选项:<br><img src="images/git/git_idea_01.png" alt="图片加载失败"></p>
+<h4 id="在idea中使用Git"><a href="#在idea中使用Git" class="headerlink" title="在idea中使用Git"></a>在idea中使用Git</h4><ol>
+<li>创建工程并将工程添加至Git<br><img src="images/git/git_idea_02.png" alt="图片加载失败"><br><img src="images/git/git_idea_03.png" alt="图片加载失败"></li>
+<li>将文件添加到暂存区<br>首先要在项目中添加.gitignore文件，忽略掉部分文件<br><img src="images/git/git_idea_04.png" alt="图片加载失败"></li>
+<li>将文件进行提交（在本地仓库）<br><img src="images/git/git_idea_05.png" alt="图片加载失败"></li>
+<li>将文件推送至远程仓库<br><img src="images/git/git_idea_06.png" alt="图片加载失败"><br><img src="images/git/git_idea_07.png" alt="图片加载失败"></li>
+<li>从远程仓库克隆<br><img src="images/git/git_idea_08.png" alt="图片加载失败"></li>
+</ol>
 
       
 
@@ -228,7 +457,165 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/23/Maven%E4%BE%9D%E8%B5%96%E5%86%B2%E7%AA%81/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/10/18/Git%E4%BD%BF%E7%94%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-Maven分模块开发" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/15/Maven%E5%88%86%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/">Maven分模块开发</a>
+    </h1>
+  
+
+        
+        <a href="/2020/10/15/Maven%E5%88%86%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/" class="archive-article-date">
+  	<time datetime="2020-10-15T09:16:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-15</time>
+</a>
+        
+
+        
+        <span class="archive-article-date">
+            
+              <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">800字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">3分</span>
+      </span>
+    </span>
+</div>
+            
+        </span>
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+
+      
+        <h2 id="分模块构建maven工程"><a href="#分模块构建maven工程" class="headerlink" title="分模块构建maven工程"></a>分模块构建maven工程</h2><h4 id="分模块构建maven工程分析"><a href="#分模块构建maven工程分析" class="headerlink" title="分模块构建maven工程分析"></a>分模块构建maven工程分析</h4><p>在企业项目开发过程中，由于项目规模庞大，业务复杂,参与的人员比较多, 一般会通过合理的模块拆分将一个大型的项目拆分为N多个小模块，分别进行开发。而且拆分出的模块可以非常容易的被其他模块复用。<br>常见的拆分方式有两种:<br>第一种:按照业务模块进行拆分，每个模块拆分成一个maven工程,例如将一个项目分为用户模块、订单模块、购物车模块等,每个模块对应就是一个maven工程<br>第二种:按照层进行拆分,例如持久层、业务层表现等,每个层对应就是一个maven工程</p>
+        
+          <a class="article-more-a" href="/2020/10/15/Maven%E5%88%86%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/10/15/Maven%E5%88%86%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-Maven依赖冲突" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/14/Maven%E4%BE%9D%E8%B5%96%E5%86%B2%E7%AA%81/">Maven依赖冲突</a>
+    </h1>
+  
+
+        
+        <a href="/2020/10/14/Maven%E4%BE%9D%E8%B5%96%E5%86%B2%E7%AA%81/" class="archive-article-date">
+  	<time datetime="2020-10-14T07:58:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-14</time>
+</a>
+        
+
+        
+        <span class="archive-article-date">
+            
+              <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">884字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">4分</span>
+      </span>
+    </span>
+</div>
+            
+        </span>
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+
+      
+        <h2 id="maven依赖冲突"><a href="#maven依赖冲突" class="headerlink" title="maven依赖冲突"></a>maven依赖冲突</h2><p>由于依赖传递现象的存在，spring-webmvc-4.24依赖spring-beans-4.2.4, spring-aop-5.0.2依赖spring-beans-5.0.2,但是发现spring-beans-4.2.4加入到了工程中,而我们希望spring-beans-5.0.2加入工程。这就造成了依赖冲突。</p>
+        
+          <a class="article-more-a" href="/2020/10/14/Maven%E4%BE%9D%E8%B5%96%E5%86%B2%E7%AA%81/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/10/14/Maven%E4%BE%9D%E8%B5%96%E5%86%B2%E7%AA%81/">展开全文 >></a>
         </p>
       
 
@@ -253,13 +640,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/14/Mybatis%E6%95%B4%E5%90%88SSM%E9%A1%B9%E7%9B%AE/">Mybatis整合SSM项目</a>
+      <a class="article-title" href="/2020/10/08/Mybatis%E6%95%B4%E5%90%88SSM%E9%A1%B9%E7%9B%AE/">Mybatis整合SSM项目</a>
     </h1>
   
 
         
-        <a href="/2020/10/14/Mybatis%E6%95%B4%E5%90%88SSM%E9%A1%B9%E7%9B%AE/" class="archive-article-date">
-  	<time datetime="2020-10-14T12:59:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-14</time>
+        <a href="/2020/10/08/Mybatis%E6%95%B4%E5%90%88SSM%E9%A1%B9%E7%9B%AE/" class="archive-article-date">
+  	<time datetime="2020-10-08T12:59:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-08</time>
 </a>
         
 
@@ -271,7 +658,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2k字</span>
+        <span class="post-count">2.4k字</span>
       </span>
     </span>
 
@@ -280,7 +667,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">11分</span>
+        <span class="post-count">13分</span>
       </span>
     </span>
 </div>
@@ -298,7 +685,7 @@
 <li>导入Maven坐标</li>
 </ol>
         
-          <a class="article-more-a" href="/2020/10/14/Mybatis%E6%95%B4%E5%90%88SSM%E9%A1%B9%E7%9B%AE/#more">more >></a>
+          <a class="article-more-a" href="/2020/10/08/Mybatis%E6%95%B4%E5%90%88SSM%E9%A1%B9%E7%9B%AE/#more">more >></a>
         
       
 
@@ -311,7 +698,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/14/Mybatis%E6%95%B4%E5%90%88SSM%E9%A1%B9%E7%9B%AE/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/10/08/Mybatis%E6%95%B4%E5%90%88SSM%E9%A1%B9%E7%9B%AE/">展开全文 >></a>
         </p>
       
 
@@ -630,7 +1017,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/24/Maven%E4%BD%BF%E7%94%A8tomcat8%E6%8F%92%E4%BB%B6/">Maven使用tomcat8插件</a>
+      <a class="article-title" href="/2020/07/24/Maven%E4%BD%BF%E7%94%A8tomcat8%E6%8F%92%E4%BB%B6/">Maven使用tomcat插件</a>
     </h1>
   
 
@@ -648,7 +1035,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">257字</span>
+        <span class="post-count">334字</span>
       </span>
     </span>
 
@@ -669,7 +1056,8 @@
     <div class="article-entry" itemprop="articleBody">
 
       
-        <p>在pom.xml当中需要做以下配置：</p>
+        <h2 id="maven集成tomcat7插件"><a href="#maven集成tomcat7插件" class="headerlink" title="maven集成tomcat7插件"></a>maven集成tomcat7插件</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.tomcat.maven<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>tomcat7-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">port</span>&gt;</span>80<span class="tag">&lt;/<span class="name">port</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">path</span>&gt;</span>/travel<span class="tag">&lt;/<span class="name">path</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">uriEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">uriEncoding</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">server</span>&gt;</span>tomcat7<span class="tag">&lt;/<span class="name">server</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="maven集成tomcat8插件"><a href="#maven集成tomcat8插件" class="headerlink" title="maven集成tomcat8插件"></a>maven集成tomcat8插件</h2><p>在pom.xml当中需要做以下配置：</p>
 <ol>
 <li>配置tomcat8-maven-plugin</li>
 </ol>
@@ -798,309 +1186,9 @@
 
 
   
-    <article id="post-Redis简单使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/16/Redis%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">Redis简单使用</a>
-    </h1>
-  
-
-        
-        <a href="/2020/07/16/Redis%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2020-07-16T08:52:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-16</time>
-</a>
-        
-
-        
-        <span class="archive-article-date">
-            
-              <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">4.2k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">18分</span>
-      </span>
-    </span>
-</div>
-            
-        </span>
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-
-      
-        <h2 id="Redis简单了解"><a href="#Redis简单了解" class="headerlink" title="Redis简单了解"></a>Redis简单了解</h2><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>Redis是一款高性能的NOSQL系列的非关系型数据库。</p>
-<p>1.1.什么是NOSQL<br>NoSQL(NoSQL = Not only SQL), 意即“不仅仅是SQL”，是一项全新的数据库理念，泛指非关系型的数据库。<br>随着互联网web2.0网站的兴起，传统的关系数据库在应付web2.0网站，特别是超大规模和高并发的SNS类型的web2.0纯动态网站已经显得力不从<br>心，暴露了很多难以克服的问题，而非关系型的数据库则由于其本身的特点得到了非常迅速的发展。NoSQL 数据库的产生就是为了解决大规模数据集<br>合多重数据种类带来的挑战，尤其是大数据应用难题。</p>
-        
-          <a class="article-more-a" href="/2020/07/16/Redis%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Redis/" class="article-tag-list-link color1">Redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/16/Redis%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-AJax &amp; JSON" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/15/AJax%20&%20JSON/">AJax &amp; JSON</a>
-    </h1>
-  
-
-        
-        <a href="/2020/07/15/AJax%20&%20JSON/" class="archive-article-date">
-  	<time datetime="2020-07-15T03:00:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-15</time>
-</a>
-        
-
-        
-        <span class="archive-article-date">
-            
-              <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">9分</span>
-      </span>
-    </span>
-</div>
-            
-        </span>
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-
-      
-        <h1 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h1><h2 id="AJAX概念："><a href="#AJAX概念：" class="headerlink" title="AJAX概念："></a>AJAX概念：</h2><p>Ajax 即“Asynchronous Javascript And XML”（异步 JavaScript 和 XML），是指一种创建交互式、快速动态网页应用的网页开发技术，<strong>无需重新加载整个网页的情况下，能够更新部分网页的技术</strong>。</p>
-        
-          <a class="article-more-a" href="/2020/07/15/AJax%20&%20JSON/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/15/AJax%20&%20JSON/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-JQuery高级使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/14/JQuery%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8/">JQuery高级使用</a>
-    </h1>
-  
-
-        
-        <a href="/2020/07/14/JQuery%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2020-07-14T08:13:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-14</time>
-</a>
-        
-
-        
-        <span class="archive-article-date">
-            
-              <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.4k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">6分</span>
-      </span>
-    </span>
-</div>
-            
-        </span>
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-
-      
-        <h2 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h2><h4 id="三种方式显示和隐藏元素"><a href="#三种方式显示和隐藏元素" class="headerlink" title="三种方式显示和隐藏元素"></a>三种方式显示和隐藏元素</h4><ol>
-<li>默认显示和隐藏方式<ul>
-<li>show([speed,[easing],[fn]])</li>
-<li>hide([speed,[easing],[fn]])</li>
-<li>toggle([speed,[easing],[fn]])</li>
-</ul>
-</li>
-</ol>
-        
-          <a class="article-more-a" href="/2020/07/14/JQuery%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JQuery/" class="article-tag-list-link color2">JQuery</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/14/JQuery%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
     </nav>
   
 
@@ -1205,11 +1293,11 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境搭建</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1222,6 +1310,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
               </li>
              
               <li class="article-tag-list-item">

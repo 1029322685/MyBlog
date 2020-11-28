@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://rainbowcat.top">
-  <title>Maven使用tomcat8插件 | Leon&#39;s blog</title>
+  <title>Maven使用tomcat插件 | Leon&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在pom.xml当中需要做以下配置：  配置tomcat8-maven-plugin  1234567891011&lt;plugin&gt;	&lt;groupId&gt;org.apache.tomcat.maven&lt;&#x2F;groupId&gt;	&lt;artifactId&gt;tomcat8-maven-plugin&lt;&#x2F;artifactId&gt;	&lt;version&gt;">
+  <meta name="description" content="maven集成tomcat7插件1234567891011&lt;plugin&gt;          &lt;groupId&gt;org.apache.tomcat.maven&lt;&#x2F;groupId&gt;          &lt;artifactId&gt;tomcat7-maven-plugin&lt;&#x2F;artifactId&gt;          &lt;version&gt;2">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Maven使用tomcat8插件">
+<meta property="og:title" content="Maven使用tomcat插件">
 <meta property="og:url" content="http://rainbowcat.top/2020/07/24/Maven%E4%BD%BF%E7%94%A8tomcat8%E6%8F%92%E4%BB%B6/index.html">
 <meta property="og:site_name" content="Leon&#39;s blog">
-<meta property="og:description" content="在pom.xml当中需要做以下配置：  配置tomcat8-maven-plugin  1234567891011&lt;plugin&gt;	&lt;groupId&gt;org.apache.tomcat.maven&lt;&#x2F;groupId&gt;	&lt;artifactId&gt;tomcat8-maven-plugin&lt;&#x2F;artifactId&gt;	&lt;version&gt;">
+<meta property="og:description" content="maven集成tomcat7插件1234567891011&lt;plugin&gt;          &lt;groupId&gt;org.apache.tomcat.maven&lt;&#x2F;groupId&gt;          &lt;artifactId&gt;tomcat7-maven-plugin&lt;&#x2F;artifactId&gt;          &lt;version&gt;2">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-07-24T09:02:37.000Z">
-<meta property="article:modified_time" content="2020-10-17T08:09:23.725Z">
+<meta property="article:modified_time" content="2020-10-26T09:38:39.877Z">
 <meta property="article:author" content="Leon Wang">
 <meta name="twitter:card" content="summary">
   
@@ -161,7 +161,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Maven使用tomcat8插件
+      Maven使用tomcat插件
     </h1>
   
 
@@ -179,7 +179,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">257字</span>
+        <span class="post-count">334字</span>
       </span>
     </span>
 
@@ -200,7 +200,8 @@
     <div class="article-entry" itemprop="articleBody">
 
       
-        <p>在pom.xml当中需要做以下配置：</p>
+        <h2 id="maven集成tomcat7插件"><a href="#maven集成tomcat7插件" class="headerlink" title="maven集成tomcat7插件"></a>maven集成tomcat7插件</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.tomcat.maven<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>tomcat7-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">port</span>&gt;</span>80<span class="tag">&lt;/<span class="name">port</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">path</span>&gt;</span>/travel<span class="tag">&lt;/<span class="name">path</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">uriEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">uriEncoding</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">server</span>&gt;</span>tomcat7<span class="tag">&lt;/<span class="name">server</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="maven集成tomcat8插件"><a href="#maven集成tomcat8插件" class="headerlink" title="maven集成tomcat8插件"></a>maven集成tomcat8插件</h2><p>在pom.xml当中需要做以下配置：</p>
 <ol>
 <li>配置tomcat8-maven-plugin</li>
 </ol>
@@ -411,11 +412,11 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color5">环境搭建</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -428,6 +429,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
               </li>
              
               <li class="article-tag-list-item">
